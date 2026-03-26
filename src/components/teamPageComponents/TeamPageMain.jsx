@@ -47,6 +47,7 @@ const coreMembers = [
     { name: "Yuvraj", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.yuvraj },
     { name: "Arjites", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.arjites },
     { name: "Prisha Acharya", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.prishaAcharya },
+    { name: "Abhishek Chopra", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.abhishek },
     // { name: "Shaina Gera", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.shainaGera },
     { name: "Mehar Ahuja", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.meharAhuja },
     // { name: "Anshika Rathore", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.anshikaRathore },

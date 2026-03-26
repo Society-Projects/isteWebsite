@@ -22,6 +22,7 @@ import saanvi from "../../assets/Core Images/Saanvi.jpg";
 import Happy from "../../assets/Core Images/Happy.jpeg";
 import rudrakshChugh from "../../assets/Core Images/Rudraksh.jpg";
 import prishaAcharya from "../../assets/Core Images/Prisha.jpg";
+import abhishek from "../../assets/Core Images/Abhishek.jpeg";
 import aryanSharma from "../../assets/Core Images/Aryan.jpg";
 import Lakshya from "../../assets/Core Images/Lakshya.jpeg";
 import divyamMittal from "../../assets/Core Images/divyam.jpg";
@@ -69,6 +70,7 @@ const profile = {
   Happy,
   // rudrakshChugh,
   aryanSharma,
+  abhishek,
   prishaAcharya,
   Lakshya,
   divyamMittal,
