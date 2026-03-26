@@ -24,16 +24,16 @@ const executiveBoard = [
     { name: 'Lakshita Gupta', role: 'General Secretary', image: profile.lakshita, github: 'githublink', linkedin: 'linkedinlink' },
     { name: 'Kaushik Arora', role: 'General Secretary', image: profile.kaushik, github: 'githublink', linkedin: 'linkedinlink' },
     { name: 'Bhavya', role: 'Finance Secretary', image: profile.bhavya, github: 'githublink', linkedin: 'linkedinlink' },
-    { name: 'Haryiank Kumra', role: 'External Secretary', image: profile.haryiank, github: 'githublink', linkedin: 'linkedinlink' },
-    { name: 'Ishan Pathak', role: 'Technical Secretary', image: profile.ishaanP, github: 'githublink', linkedin: 'linkedinlink' },
     { name: 'Sakshat Jain', role: 'Joint Secretary', image: profile.sakshat, github: 'githublink', linkedin: 'linkedinlink' },
-    { name: 'Abhinivesh Sharma', role: 'Joint Secretary', image: profile.abhinivesh, github: 'githublink', linkedin: 'linkedinlink' },
+    { name: 'Saarthi Arora', role: 'Joint Secretary', image: profile.Saarthi, github: 'githublink', linkedin: 'linkedinlink' },
     { name: 'Ishita Singh Oberoi', role: 'Joint Secretary', image: profile.ishita, github: 'githublink', linkedin: 'linkedinlink' },
+    { name: 'Abhinivesh Sharma', role: 'Joint Secretary', image: profile.abhinivesh, github: 'githublink', linkedin: 'linkedinlink' },
+    { name: 'Ishan Pathak', role: 'Technical Secretary', image: profile.ishaanP, github: 'githublink', linkedin: 'linkedinlink' },
     { name: 'Ishaan Sharma', role: 'Convener', image: profile.ishaan, github: 'githublink', linkedin: 'linkedinlink' },
+    { name: 'Haryiank Kumra', role: 'External Secretary', image: profile.haryiank, github: 'githublink', linkedin: 'linkedinlink' },
 ];
 
 const executiveCommittee = [
-    { name: 'Saarthi Arora', role: 'Content Executive', image: profile.saarthi, github: 'githublink', linkedin: 'linkedinlink' },
     { name: 'Tanishq Soni', role: 'Software Executive', image: profile.tanishq, github: 'githublink', linkedin: 'linkedinlink' },
     { name: 'Rishabh Garg', role: 'Media Executive', image: profile.rishabh, github: 'githublink', linkedin: 'linkedinlink' },
     { name: 'Garv Chopra', role: 'Technical Executive', image: profile.garv, github: 'githublink', linkedin: 'linkedinlink' },
@@ -42,13 +42,15 @@ const executiveCommittee = [
 ];
 
 const coreMembers = [
+    { name: "Happy Singh Rajpurohit", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.Happy },
     { name: "Pulkit", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.pulkit },
     { name: "Yuvraj", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.yuvraj },
     { name: "Arjites", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.arjites },
     { name: "Prisha Acharya", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.prishaAcharya },
-    { name: "Shaina Gera", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.shainaGera },
+    // { name: "Shaina Gera", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.shainaGera },
     { name: "Mehar Ahuja", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.meharAhuja },
-    { name: "Anshika Rathore", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.anshikaRathore },
+    // { name: "Anshika Rathore", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.anshikaRathore },
+    { name: "Lakshya Goyal", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.Lakshya },
     { name: "Saanvi", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.saanvi },
     // { name: "Rudraksh Chugh", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.rudrakshChugh },
     { name: "Aryan Sharma", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.aryanSharma },
@@ -65,7 +67,7 @@ const coreMembers = [
     { name: "Nishika", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.nishika },
     { name: "Molika", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.molika },
     { name: "Aditya", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.aditya },
-    { name: "Deepak Kumar", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.deepakKumar },
+    // { name: "Deepak Kumar", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.deepakKumar },
     { name: "Ashit", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.ashit },
     { name: "Udhey", role: "Core Member", github: "githublink", linkedin: "linkedinlink", image: profile.udhey }
     

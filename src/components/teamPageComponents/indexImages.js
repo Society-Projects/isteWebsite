@@ -9,6 +9,7 @@ import ishita from "../../assets/EB EC Images/IshitaOberoi.jpg";
 import kaushik from "../../assets/EB EC Images/KaushikArora.jpg";
 import lakshita from "../../assets/EB EC Images/LakshitaGupta.jpg";
 import saarthi from "../../assets/EB EC Images/SAARTHIARORA.jpg";
+import Saarthi from "../../assets/EB EC Images/Saarthi.jpeg";
 import sakshat from "../../assets/EB EC Images/SakshatJain.jpg";
 import tanishq from "../../assets/EB EC Images/TanishqSoni.jpg";
 import garv from "../../assets/EB EC Images/Garvchopra.jpg";
@@ -18,9 +19,11 @@ import dixant from "../../assets/EB EC Images/dixant.jpg";
 
 import anshikaRathore from "../../assets/Core Images/Anshika.jpg";
 import saanvi from "../../assets/Core Images/Saanvi.jpg";
+import Happy from "../../assets/Core Images/Happy.jpeg";
 import rudrakshChugh from "../../assets/Core Images/Rudraksh.jpg";
-import aryanSharma from "../../assets/Core Images/Aryan.jpg";
 import prishaAcharya from "../../assets/Core Images/Prisha.jpg";
+import aryanSharma from "../../assets/Core Images/Aryan.jpg";
+import Lakshya from "../../assets/Core Images/Lakshya.jpeg";
 import divyamMittal from "../../assets/Core Images/divyam.jpg";
 import devyanshArya from "../../assets/Core Images/Devyansh.jpg";
 import meharAhuja from "../../assets/Core Images/Mehar.jpg";
@@ -54,6 +57,7 @@ const profile = {
   kaushik,
   lakshita,
   saarthi,
+  Saarthi,
   sakshat,
   tanishq,
   garv,
@@ -62,9 +66,11 @@ const profile = {
   dixant,
   anshikaRathore,
   saanvi,
+  Happy,
   // rudrakshChugh,
   aryanSharma,
   prishaAcharya,
+  Lakshya,
   divyamMittal,
   devyanshArya,
   meharAhuja,
