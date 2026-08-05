@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
+import { Link } from "react-router-dom";
 // 🖼️ LOCAL PHOTO ASSETS INTEGRATION
 import teamPhoto from "../assets/team.jpg";
 import orientationPhoto from "../assets/orientation.JPG";
@@ -225,9 +226,15 @@ export default function HomeGauri({ sections = defaultSections, className }) {
                       <div className="flex flex-wrap gap-4 pt-2">
                         {section.actions.map((act) => (
                           act.href ? (
-                            <a key={act.label} href={act.href} className="btn-primary-glow inline-block">
-                              {act.label}
-                            </a>
+                            act.href.startsWith("http") || act.href.includes("#") ? (
+                              <a key={act.label} href={act.href} className="btn-primary-glow inline-block">
+                                {act.label}
+                              </a>
+                            ) : (
+                              <Link key={act.label} to={act.href} className="btn-primary-glow inline-block">
+                                {act.label}
+                              </Link>
+                            )
                           ) : (
                             <button key={act.label} className="btn-primary-glow">
                               {act.label}
@@ -321,9 +328,15 @@ export default function HomeGauri({ sections = defaultSections, className }) {
                 <div className={cn("flex flex-wrap gap-4 pt-4 w-full", section.align === 'center' ? "justify-center" : "justify-start")}>
                   {section.actions.map((act) => {
                     return act.href ? (
-                      <a key={act.label} href={act.href} className="btn-primary-glow inline-block">
-                        {act.label}
-                      </a>
+                      act.href.startsWith("http") || act.href.includes("#") ? (
+                        <a key={act.label} href={act.href} className="btn-primary-glow inline-block">
+                          {act.label}
+                        </a>
+                      ) : (
+                        <Link key={act.label} to={act.href} className="btn-primary-glow inline-block">
+                          {act.label}
+                        </Link>
+                      )
                     ) : (
                       <button key={act.label} className="btn-primary-glow">
                         {act.label}
