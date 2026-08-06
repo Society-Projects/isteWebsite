@@ -2,16 +2,16 @@ import { useRef } from "react";
 import "./Sponsors.css";
 
 // 🖼️ STATIC IMPORT OF SPONSOR LOGOS
-import surreyImg from "../../assets/Sponsor Images/surrey.png";
-import plasmidImg from "../../assets/Sponsor Images/plasmid.png";
-import hoverrobotixImg from "../../assets/Sponsor Images/hoverrobotix.png";
-import bakingoImg from "../../assets/Sponsor Images/bakingo.png";
-import stockedgeImg from "../../assets/Sponsor Images/stockedge.jpg";
-import mentorxImg from "../../assets/Sponsor Images/mentorx.jpeg";
-import oatleyImg from "../../assets/Sponsor Images/oatley.jpg";
-import echoesImg from "../../assets/Sponsor Images/echoes.jpg";
-import interviewImg from "../../assets/Sponsor Images/interview.jpg";
-import xyzImg from "../../assets/Sponsor Images/xyz.jpg";
+const surreyImg = "/Sponsor Images/surrey.png";
+const plasmidImg = "/Sponsor Images/plasmid.png";
+const hoverrobotixImg = "/Sponsor Images/hoverrobotix.png";
+const bakingoImg = "/Sponsor Images/bakingo.png";
+const stockedgeImg = "/Sponsor Images/stockedge.jpg";
+const mentorxImg = "/Sponsor Images/mentorx.jpeg";
+const oatleyImg = "/Sponsor Images/oatley.jpg";
+const echoesImg = "/Sponsor Images/echoes.jpg";
+const interviewImg = "/Sponsor Images/interview.jpg";
+const xyzImg = "/Sponsor Images/xyz.jpg";
 
 /**
  * SPONSORS DATA
@@ -147,6 +147,7 @@ function useTilt() {
 function LogoImage({ src, alt, className }) {
   return (
     <img
+      loading="lazy"
       src={src}
       alt={alt}
       className={className}

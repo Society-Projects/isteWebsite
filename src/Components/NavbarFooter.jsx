@@ -1,6 +1,28 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import isteLogo from "../assets/iste-logo.png";
+
+// Inline social SVGs for maximum reliability
+const LinkedInIcon = ({ size = 18 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+    <rect x="2" y="9" width="4" height="12"></rect>
+    <circle cx="4" cy="4" r="2"></circle>
+  </svg>
+);
+
+const InstagramIcon = ({ size = 18 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+  </svg>
+);
+
+const GitHubIcon = ({ size = 18 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+  </svg>
+);
 
 // Navbar links (Removed 'About')
 const navItems = ["Home", "Events", "Team", "Sponsors", "Projects", "Contact"];
@@ -17,8 +39,9 @@ const footerQuickLinks = [
 ];
 
 const socials = [
-  { icon: "in", label: "LinkedIn", url: "https://linkedin.com" },
-  { icon: "ig", label: "Instagram", url: "https://instagram.com" },
+  { icon: <LinkedInIcon size={18} />, label: "LinkedIn", url: import.meta.env.VITE_LINKEDIN || "https://www.linkedin.com/company/iste-thapar" },
+  { icon: <InstagramIcon size={18} />, label: "Instagram", url: import.meta.env.VITE_INSTAGRAM || "https://instagram.com/iste_tiet" },
+  { icon: <GitHubIcon size={18} />, label: "GitHub", url: import.meta.env.VITE_GITHUB || "https://github.com/ISTE-Thapar-Chapter" }
 ];
 
 function NavbarFooter({ children }) {
@@ -104,7 +127,7 @@ function NavbarFooter({ children }) {
     page: {
       background: "transparent",
       color: "white",
-      fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif",
+      fontFamily: "'Poppins', 'Inter', sans-serif",
       minHeight: "100vh",
       overflowX: "hidden",
       WebkitFontSmoothing: "antialiased",
@@ -127,7 +150,7 @@ function NavbarFooter({ children }) {
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      padding: "0 40px",
+      padding: "0 32px",
       height: scrolled ? "70px" : "88px",
       background: scrolled ? "rgba(0, 0, 0, 0.94)" : "rgba(0, 0, 0, 0.5)",
       backdropFilter: "blur(18px)",
@@ -146,30 +169,41 @@ function NavbarFooter({ children }) {
       userSelect: "none",
     },
     logo: {
-      width: scrolled ? "120px" : "140px",
-      height: scrolled ? "44px" : "52px",
+      width: scrolled ? "44px" : "54px",
+      height: scrolled ? "44px" : "54px",
       objectFit: "contain",
       transition: "all 0.3s ease",
-      filter: "drop-shadow(0 0 10px rgba(0, 240, 255, 0.3))",
+      filter: "drop-shadow(0 0 8px rgba(0, 240, 255, 0.2))",
     },
     brandText: {
       display: "flex",
       flexDirection: "column",
-      lineHeight: 1.1,
+      lineHeight: 1.0,
+      marginLeft: "14px",
+      alignItems: "flex-start",
+      justifyContent: "center",
     },
     brandTitle: {
       fontWeight: 800,
-      fontSize: "1.2rem",
+      fontSize: scrolled ? "1.5rem" : "1.85rem",
       letterSpacing: "0.06em",
       color: "#ffffff",
-      fontFamily: "'Plus Jakarta Sans', sans-serif",
+      fontFamily: "'Poppins', sans-serif",
+      transition: "all 0.3s ease",
+      lineHeight: 1.0,
     },
     brandSub: {
-      fontStyle: "italic",
-      fontWeight: 600,
-      fontSize: "0.75rem",
-      color: "#00F0FF",
-      letterSpacing: "0.05em",
+      fontStyle: "normal",
+      fontWeight: 700,
+      fontSize: scrolled ? "0.62rem" : "0.72rem",
+      color: "#94a3b8",
+      letterSpacing: "0.18em",
+      textTransform: "uppercase",
+      transition: "all 0.3s ease",
+      marginTop: "4px",
+      display: "block",
+      verticalAlign: "baseline",
+      lineHeight: 1.0,
     },
     navList: {
       display: "flex",
@@ -226,7 +260,7 @@ function NavbarFooter({ children }) {
       fontSize: "0.88rem",
       textTransform: "uppercase",
       letterSpacing: "0.05em",
-      fontFamily: "'Plus Jakarta Sans', sans-serif",
+      fontFamily: "'Poppins', sans-serif",
     },
     text: {
       color: "#94a3b8",
@@ -340,7 +374,11 @@ function NavbarFooter({ children }) {
       {/* 🧭 NAVBAR WITH DEDICATED PAGE ROUTING */}
       <nav style={styles.navbar} className="iste-navbar">
         <div style={styles.brand} onClick={scrollToTop} title="ISTE Thapar Chapter Home">
-          <img src={isteLogo} alt="ISTE Thapar Chapter logo" style={styles.logo} />
+          <img src="/istelogo.png" alt="ISTE Logo" style={styles.logo} />
+          <div style={styles.brandText}>
+            <span style={styles.brandTitle}>ISTE</span>
+            <sub style={styles.brandSub}>Thapar Chapter</sub>
+          </div>
         </div>
 
         {/* Desktop Navigation Links */}
@@ -418,8 +456,7 @@ function NavbarFooter({ children }) {
           <div style={styles.footerGrid} className="iste-footer-grid">
             <div>
               <div style={styles.footerBrand}>
-                <img src={isteLogo} alt="ISTE logo" style={styles.footerLogo} />
-               
+                <img src="/istelogo.png" alt="ISTE logo" style={styles.footerLogo} />
               </div>
               <p style={styles.text}>
                 Indian Society for Technical Education — Thapar Institute of

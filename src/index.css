@@ -16,10 +16,10 @@
   --color-neon-dim: #00B4D8;
 
   /* 🔤 Ultra-smooth typography stack */
-  --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, sans-serif;
-  --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-display: 'Poppins', system-ui, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-heading: 'Poppins', system-ui, sans-serif;
 
   /* ✨ Glow shadows */
   --shadow-glow-darkblue: 0 0 35px rgba(11,61,145,0.3);
