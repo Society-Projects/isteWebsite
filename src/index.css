@@ -1,153 +1,106 @@
 @import "tailwindcss";
 
-@theme {
-  /* 🎨 Colors — pitch-black theme matching istetiet.com */
-  --color-void: #000000;
-  --color-ink: #0D1524;
-  --color-surface: #0D1524;
+@layer base {
+  :root {
+    --bg-main: #080c14;
+    --card-bg: rgba(15, 23, 42, 0.7);
+    --border-color: rgba(255, 255, 255, 0.08);
+    --accent-cyan: #06b6d4;
+    --accent-purple: #8b5cf6;
+    --accent-emerald: #10b981;
+  }
 
-  --color-darkblue-400: #00B4D8;
-  --color-darkblue-500: #0B3D91;
-  --color-darkblue-600: #072A63;
-  --color-darkblue-700: #041C4A;
-  --color-darkblue-900: #02040A;
+  body {
+    background-color: var(--bg-main);
+    color: #f1f5f9;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  }
 
-  --color-neon-blue: #00F0FF;
-  --color-neon-dim: #00B4D8;
+  h1, h2, h3, h4, .font-heading {
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  }
 
-  /* 🔤 Ultra-smooth typography stack */
-  --font-display: 'Poppins', system-ui, sans-serif;
-  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --font-heading: 'Poppins', system-ui, sans-serif;
-
-  /* ✨ Glow shadows */
-  --shadow-glow-darkblue: 0 0 35px rgba(11,61,145,0.3);
-  --shadow-glow-blue: 0 0 30px rgba(0,240,255,0.25);
-
-  /* 🖼️ Background images used by TeamSection's ambient backdrop */
-  --background-image-grid-lines: linear-gradient(rgba(0,240,255,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(0,240,255,0.14) 1px, transparent 1px);
-  --background-image-radial-fade: radial-gradient(circle at 50% 30%, rgba(0, 240, 255, 0.18), rgba(11, 61, 145, 0.3) 40%, transparent 70%);
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
 }
 
-html {
-  scroll-behavior: smooth;
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-body {
-  @apply text-white font-sans antialiased;
-  background-color: #030408;
-  background-image: 
-    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(0, 240, 255, 0.12) 0%, transparent 100%),
-    linear-gradient(to right, rgba(0, 240, 255, 0.07) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 240, 255, 0.07) 1px, transparent 1px);
-  background-size: 100% 100%, 80px 80px, 80px 80px;
-  background-attachment: fixed;
-  -webkit-font-smoothing: antialiased;
-}img {
-  filter: none !important;
-  -webkit-filter: none !important;
+.glass-card {
+  background: rgba(18, 26, 46, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Hide scrollbars globally */
+.glass-card:hover {
+  background: rgba(26, 37, 66, 0.75);
+  border-color: rgba(6, 182, 212, 0.3);
+  box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.15);
+  transform: translateY(-3px);
+}
+
+.glow-cyan {
+  text-shadow: 0 0 15px rgba(6, 182, 212, 0.5);
+}
+
+.glow-box-cyan {
+  box-shadow: 0 0 20px -2px rgba(6, 182, 212, 0.25);
+}
+
+.glow-box-purple {
+  box-shadow: 0 0 20px -2px rgba(139, 92, 246, 0.25);
+}
+
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  display: none !important;
-}
-html, body {
-  scrollbar-width: none !important;
-  -ms-overflow-style: none !important;
-}
-/* Reusable design primitives */
-@layer components {
-  .glass-panel {
-    @apply bg-[#0D1524]/90 backdrop-blur-xl border border-white/10;
-  }
-
-  .glow-border {
-    @apply border border-[#0B3D91]/30 transition-colors duration-300;
-  }
-
-  .glow-border:hover,
-  .glow-border:focus-visible {
-    @apply border-[#00F0FF]/60;
-  }
-
-  .eyebrow {
-    @apply font-mono text-xs uppercase tracking-[0.35em] text-[#00F0FF]/80;
-  }
-
-  /* 🎯 UNIFIED SMOOTH HEADINGS ACROSS ALL PAGES */
-  .page-heading {
-    font-family: var(--font-display);
-    font-weight: 800;
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: -0.01em;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* 🎯 UNIFIED BUTTON STYLING MATCHING HOMEPAGE */
-  .btn-primary-glow {
-    font-family: var(--font-display);
-    padding: 0.65rem 1.75rem;
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    border-radius: 9999px;
-    color: #ffffff;
-    border: 1px solid rgba(0, 240, 255, 0.35);
-    background-image: linear-gradient(90deg, #02040A, #0B3D91, #00F0FF);
-    background-size: 220% 100%;
-    background-position: left;
-    transition: background-position 0.6s ease-out, box-shadow 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 0 12px rgba(0, 240, 255, 0.18);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    cursor: pointer;
-  }
-
-  .btn-primary-glow:hover {
-    background-position: right;
-    box-shadow: 0 0 28px rgba(0, 240, 255, 0.6);
-  }
-
-  .btn-primary-glow:active {
-    transform: scale(0.96);
-  }
+  width: 8px;
+  height: 8px;
 }
 
-:focus-visible {
-  outline: 2px solid #00F0FF;
-  outline-offset: 3px;
+::-webkit-scrollbar-track {
+  background: #080c14;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
   border-radius: 4px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+::-webkit-scrollbar-thumb:hover {
+  background: #06b6d4;
 }
 
+/* Infinite Marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Floating animation */
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-15px);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }
 
 .animate-float {
-  animation: float 6s ease-in-out infinite;
+  animation: float 5s ease-in-out infinite;
 }

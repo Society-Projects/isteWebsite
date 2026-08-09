@@ -1,0 +1,72 @@
+[
+  {
+    "id": "sp-1",
+    "name": "MentorX",
+    "logo": "/Sponsor Images/mentorx.jpeg",
+    "category": "Title Partner",
+    "website": "https://mentorx.com"
+  },
+  {
+    "id": "sp-2",
+    "name": "InterviewBuddy",
+    "logo": "/Sponsor Images/interview.jpg",
+    "category": "Tech Partner",
+    "website": "https://interviewbuddy.in"
+  },
+  {
+    "id": "sp-3",
+    "name": "StockEdge",
+    "logo": "/Sponsor Images/stockedge.jpg",
+    "category": "Gold Sponsor",
+    "website": "https://stockedge.com"
+  },
+  {
+    "id": "sp-4",
+    "name": "Bakingo",
+    "logo": "/Sponsor Images/bakingo.png",
+    "category": "Beverage Partner",
+    "website": "https://bakingo.com"
+  },
+  {
+    "id": "sp-5",
+    "name": "Hover Robotix",
+    "logo": "/Sponsor Images/hoverrobotix.png",
+    "category": "Tech Partner",
+    "website": "https://hoverrobotix.com"
+  },
+  {
+    "id": "sp-6",
+    "name": "Plasmid",
+    "logo": "/Sponsor Images/plasmid.png",
+    "category": "Learning Partner",
+    "website": "https://plasmid.co"
+  },
+  {
+    "id": "sp-7",
+    "name": "Echoes",
+    "logo": "/Sponsor Images/echoes.jpg",
+    "category": "Gold Sponsor",
+    "website": "#"
+  },
+  {
+    "id": "sp-8",
+    "name": "Surrey",
+    "logo": "/Sponsor Images/surrey.png",
+    "category": "Tech Partner",
+    "website": "#"
+  },
+  {
+    "id": "sp-9",
+    "name": "Oatley",
+    "logo": "/Sponsor Images/oatley.jpg",
+    "category": "Beverage Partner",
+    "website": "#"
+  },
+  {
+    "id": "sp-10",
+    "name": "XYZ Domains",
+    "logo": "/Sponsor Images/xyz.jpg",
+    "category": "Tech Partner",
+    "website": "https://gen.xyz"
+  }
+]

@@ -1,0 +1,82 @@
+[
+  {
+    "id": "iste-nexus-platform",
+    "title": "ISTE Nexus Portal",
+    "description": "An interactive digital portal for student chapter management, event registrations, verified certificates, and automated attendance tracking.",
+    "category": "Web Dev",
+    "technologies": ["React", "TypeScript", "Three.js", "Node.js", "MongoDB"],
+    "image": "/team.jpg",
+    "githubUrl": "https://github.com/iste-student-chapter/iste-nexus",
+    "demoUrl": "https://iste-website.vercel.app",
+    "contributors": [
+      { "name": "Arjitesh Sharma", "role": "Lead Frontend", "avatar": "/EB/Arjites.jpg" },
+      { "name": "Abhinav Singh", "role": "Full Stack Dev", "avatar": "/Core/Abhinav.jpg" }
+    ],
+    "featured": true,
+    "stars": 48
+  },
+  {
+    "id": "smart-campus-bot",
+    "title": "Campus Navigator AI",
+    "description": "Intelligent conversational assistant and RAG vector chatbot providing 24/7 instant student support, course schedules, and campus map directions.",
+    "category": "AI & ML",
+    "technologies": ["Python", "PyTorch", "FastAPI", "LangChain", "Pinecone"],
+    "image": "/Events/Hackathon/h-1.png",
+    "githubUrl": "https://github.com/iste-student-chapter/campus-ai-bot",
+    "demoUrl": "#",
+    "contributors": [
+      { "name": "Aryan Malhotra", "role": "AI Lead", "avatar": "/EB/Aryan.jpg" },
+      { "name": "Ihit Kumar", "role": "ML Engineer", "avatar": "/Core/Ihit.jpg" }
+    ],
+    "featured": true,
+    "stars": 62
+  },
+  {
+    "id": "pulse-iot-mesh",
+    "title": "Pulse IoT Environmental Mesh",
+    "description": "Custom hardware mesh sensor array monitoring air quality, ambient temperature, noise levels, and room occupancy across campus buildings.",
+    "category": "IoT & Hardware",
+    "technologies": ["ESP32", "C++", "MQTT", "Grafana", "InfluxDB"],
+    "image": "/Events/Society Fair/sf-1.png",
+    "githubUrl": "https://github.com/iste-student-chapter/pulse-iot",
+    "demoUrl": "#",
+    "contributors": [
+      { "name": "Ashit Kumar", "role": "Hardware Lead", "avatar": "/EB/Ashit.jpg" },
+      { "name": "Harshil Gupta", "role": "Embedded Dev", "avatar": "/Core/Harshil.jpg" }
+    ],
+    "featured": true,
+    "stars": 39
+  },
+  {
+    "id": "sentinel-cyber-vault",
+    "title": "Sentinel Security Audit Engine",
+    "description": "Automated security scanner identifying vulnerabilities, open ports, and SSL misconfigurations in web services.",
+    "category": "Cyber Security",
+    "technologies": ["Go", "Docker", "Python", "Linux CLI"],
+    "image": "/Events/Tech Unplugged/t-1.JPG",
+    "githubUrl": "https://github.com/iste-student-chapter/sentinel-sec",
+    "demoUrl": "#",
+    "contributors": [
+      { "name": "Divyam Mehta", "role": "SecOps Lead", "avatar": "/EB/Divyam.jpg" },
+      { "name": "Shubh Gupta", "role": "Security Researcher", "avatar": "/Core/Shubh.jpg" }
+    ],
+    "featured": false,
+    "stars": 27
+  },
+  {
+    "id": "iste-mobile-app",
+    "title": "ISTE Connect Mobile",
+    "description": "Cross-platform Flutter mobile application enabling students to get event notifications, digital entry passes, and team announcements.",
+    "category": "Mobile Apps",
+    "technologies": ["Flutter", "Dart", "Firebase", "REST APIs"],
+    "image": "/orientation.JPG",
+    "githubUrl": "https://github.com/iste-student-chapter/iste-mobile",
+    "demoUrl": "#",
+    "contributors": [
+      { "name": "Arshia Kaur", "role": "Mobile Lead", "avatar": "/EB/Arshia.jpg" },
+      { "name": "Lakshita Sharma", "role": "Flutter Dev", "avatar": "/Core/Lakshita.jpg" }
+    ],
+    "featured": false,
+    "stars": 34
+  }
+]

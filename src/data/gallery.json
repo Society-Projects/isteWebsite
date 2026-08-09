@@ -1,0 +1,82 @@
+[
+  {
+    "id": "gal-1",
+    "title": "CodeStorm Hackathon Keynote",
+    "category": "Events",
+    "image": "/Events/Hackathon/h-1.png",
+    "date": "2026",
+    "description": "Opening keynote and mentor check-in at CodeStorm Hackathon."
+  },
+  {
+    "id": "gal-2",
+    "title": "Tech Unplugged Auditorium Session",
+    "category": "Workshops",
+    "image": "/Events/Tech Unplugged/t-1.JPG",
+    "date": "2026",
+    "description": "Packed auditorium during cloud native technical session."
+  },
+  {
+    "id": "gal-3",
+    "title": "Annual Tech Colloquium Speakers",
+    "category": "Events",
+    "image": "/Events/Colloquium/c-1.JPG",
+    "date": "2025",
+    "description": "Faculty advisors and keynote speakers discussing ethics in AI."
+  },
+  {
+    "id": "gal-4",
+    "title": "ISTE Core Team Orientation",
+    "category": "Team",
+    "image": "/team.jpg",
+    "date": "2025",
+    "description": "ISTE executive committee and domain leads photoshoot."
+  },
+  {
+    "id": "gal-5",
+    "title": "Freshmen Orientation Showcase",
+    "category": "Workshops",
+    "image": "/orientation.JPG",
+    "date": "2025",
+    "description": "Welcoming 500+ new recruits to ISTE Student Chapter."
+  },
+  {
+    "id": "gal-6",
+    "title": "Overthrone Finals",
+    "category": "Achievements",
+    "image": "/Events/Overthrone/ot-1.JPG",
+    "date": "2025",
+    "description": "Final award ceremony of Overthrone coding clash."
+  },
+  {
+    "id": "gal-7",
+    "title": "Campus Society Fair Exhibition",
+    "category": "Projects",
+    "image": "/Events/Society Fair/sf-1.png",
+    "date": "2025",
+    "description": "Demonstrating IoT hardware and AR/VR student projects."
+  },
+  {
+    "id": "gal-8",
+    "title": "Colloquium Interactive Q&A",
+    "category": "Events",
+    "image": "/Events/Colloquium/c-2.JPG",
+    "date": "2025",
+    "description": "Students engaging in Q&A session with alumni mentors."
+  },
+  {
+    "id": "gal-9",
+    "title": "Tech Unplugged Hands-on Coding",
+    "category": "Workshops",
+    "image": "/Events/Tech Unplugged/t-2.JPG",
+    "date": "2026",
+    "description": "Live coding session on reactive web frameworks."
+  },
+  {
+    "id": "gal-10",
+    "title": "Orientation Icebreaker Activity",
+    "category": "Team",
+    "image": "/Events/Orientation/o-2.JPG",
+    "date": "2025",
+    "description": "Team bonding and icebreakers during annual orientation."
+  }
+]

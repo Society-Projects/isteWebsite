@@ -1,0 +1,138 @@
+[
+  {
+    "id": "hackathon-2026",
+    "title": "CodeStorm 4.0 Hackathon",
+    "category": "Hackathons",
+    "date": "October 24-25, 2026",
+    "time": "10:00 AM IST",
+    "venue": "Main Auditorium & Hybrid",
+    "shortDescription": "24-hour intense hackathon where teams solve real-world problems using AI, Web3, and IoT.",
+    "description": "CodeStorm is ISTE's flagship annual 24-hour hackathon bringing together over 500+ participants from top universities across the region. Innovators hack on cutting-edge problems in AI, Decentralized Tech, EdTech, and Sustainable Smart Cities with mentorship from industry leaders.",
+    "image": "/Events/Hackathon/h-1.png",
+    "speakers": [
+      { "name": "Arjitesh Sharma", "role": "Lead Architect, Tech Labs" },
+      { "name": "Geetika Verma", "role": "Senior AI Researcher" }
+    ],
+    "galleryImages": [
+      "/Events/Hackathon/h-1.png",
+      "/Events/Overthrone/ot-1.JPG",
+      "/Events/Overthrone/ot-2.JPG"
+    ],
+    "registrationUrl": "#register",
+    "isUpcoming": true,
+    "featured": true,
+    "tags": ["Hackathon", "24-Hour", "AI", "Prizes", "Mentorship"]
+  },
+  {
+    "id": "tech-unplugged",
+    "title": "Tech Unplugged 2026",
+    "category": "Technical Sessions",
+    "date": "September 15, 2026",
+    "time": "02:00 PM IST",
+    "venue": "Audi 2, Campus Center",
+    "shortDescription": "An interactive tech symposium featuring talks on Next-Gen Web, Cloud Native, and Quantum Computing.",
+    "description": "Tech Unplugged bridges academic theory with industry practice. Interactive keynotes, live code breakdowns, and Q&A sessions with veteran engineers on microservices, system design, and AI deployment.",
+    "image": "/Events/Tech Unplugged/t-1.JPG",
+    "speakers": [
+      { "name": "Aryan Malhotra", "role": "DevOps Engineer" },
+      { "name": "Nishika Gupta", "role": "Product Lead" }
+    ],
+    "galleryImages": [
+      "/Events/Tech Unplugged/t-1.JPG",
+      "/Events/Tech Unplugged/t-2.JPG",
+      "/Events/Tech Unplugged/t-3.JPG",
+      "/Events/Tech Unplugged/t-4.JPG",
+      "/Events/Tech Unplugged/t-5.JPG"
+    ],
+    "registrationUrl": "#register",
+    "isUpcoming": true,
+    "featured": true,
+    "tags": ["Symposium", "Cloud Native", "System Design", "Web Development"]
+  },
+  {
+    "id": "colloquium-2025",
+    "title": "Annual Tech Colloquium",
+    "category": "Guest Lectures",
+    "date": "April 18, 2025",
+    "time": "11:00 AM IST",
+    "venue": "Conference Hall B",
+    "shortDescription": "Panel discussions and lightning talks on ethics in AI and sustainable engineering.",
+    "description": "The Annual Tech Colloquium gathered distinguished faculty, alumni, and industry pioneers for deep dives into responsible artificial intelligence, cybersecurity frameworks, and student startup ecosystems.",
+    "image": "/Events/Colloquium/c-1.JPG",
+    "speakers": [
+      { "name": "Dr. Suman Sharma", "role": "Faculty Advisor, ISTE" },
+      { "name": "Ayush Garg", "role": "Alumni Speaker & Founder" }
+    ],
+    "galleryImages": [
+      "/Events/Colloquium/c-1.JPG",
+      "/Events/Colloquium/c-2.JPG",
+      "/Events/Colloquium/c-3.JPG",
+      "/Events/Colloquium/c-4.JPG",
+      "/Events/Colloquium/c-5.JPG"
+    ],
+    "isUpcoming": false,
+    "featured": true,
+    "tags": ["Colloquium", "Keynote", "Faculty", "Alumni", "AI Ethics"]
+  },
+  {
+    "id": "overthrone-esports",
+    "title": "Overthrone Gaming & Tech Clash",
+    "category": "Competitions",
+    "date": "March 05, 2025",
+    "time": "09:30 AM IST",
+    "venue": "Student Union Hall",
+    "shortDescription": "High-octane competitive gaming tournament and algorithmic problem solving championship.",
+    "description": "Overthrone combined competitive programming challenges with esports tournaments, testing both logical speed and teamwork under pressure.",
+    "image": "/Events/Overthrone/ot-1.JPG",
+    "galleryImages": [
+      "/Events/Overthrone/ot-1.JPG",
+      "/Events/Overthrone/ot-2.JPG",
+      "/Events/Overthrone/ot-3.jpg",
+      "/Events/Overthrone/ot-4.jpg",
+      "/Events/Overthrone/ot-5.JPG"
+    ],
+    "isUpcoming": false,
+    "featured": false,
+    "tags": ["Gaming", "Competition", "Algorithms", "Esports"]
+  },
+  {
+    "id": "orientation-2025",
+    "title": "ISTE Grand Orientation",
+    "category": "Workshops",
+    "date": "August 20, 2025",
+    "time": "04:00 PM IST",
+    "venue": "Open Air Theatre",
+    "shortDescription": "Welcoming incoming freshmen to the ISTE Student Chapter family with live demos and domain overviews.",
+    "description": "Our annual welcome event introducing new students to Technical, Design, Content, Operations, and Management domains at ISTE with icebreakers, live project demos, and hands-on mini workshops.",
+    "image": "/Events/Orientation/o-1.JPG",
+    "galleryImages": [
+      "/Events/Orientation/o-1.JPG",
+      "/Events/Orientation/o-2.JPG",
+      "/Events/Orientation/o-3.jpg",
+      "/Events/Orientation/o-4.jpg",
+      "/Events/Orientation/o-5.jpg"
+    ],
+    "isUpcoming": false,
+    "featured": true,
+    "tags": ["Orientation", "Freshmen", "Community", "Workshops"]
+  },
+  {
+    "id": "society-fair-2025",
+    "title": "Campus Society Showcase",
+    "category": "Collaborations",
+    "date": "February 12, 2025",
+    "time": "10:00 AM IST",
+    "venue": "Central Lawn",
+    "shortDescription": "Interactive exhibition highlighting top student projects, robotics hardware, and VR experiences.",
+    "description": "ISTE showcased interactive 3D web applications, autonomous robotics prototypes, and AR/VR demonstrations to over 2,000 students across campus.",
+    "image": "/Events/Society Fair/sf-1.png",
+    "galleryImages": [
+      "/Events/Society Fair/sf-1.png",
+      "/orientation.JPG",
+      "/team.jpg"
+    ],
+    "isUpcoming": false,
+    "featured": false,
+    "tags": ["Exhibition", "Robotics", "AR/VR", "Showcase"]
+  }
+]

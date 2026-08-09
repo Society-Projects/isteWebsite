@@ -1,0 +1,412 @@
+[
+  {
+    "id": "fac-1",
+    "name": "Dr. Suman Sharma",
+    "role": "Faculty Advisor & Mentor",
+    "section": "faculty",
+    "department": "School of Computer Science & Engineering",
+    "image": "/Faculty/suman.jpg",
+    "bio": "Guiding student innovation, academic research, and industry collaborations at ISTE Student Chapter.",
+    "linkedin": "https://linkedin.com",
+    "email": "faculty.advisor@iste.org"
+  },
+  {
+    "id": "fac-2",
+    "name": "Prof. Technical Mentor",
+    "role": "Chief Patron & Faculty Guide",
+    "section": "faculty",
+    "department": "Department of Technology & Engineering",
+    "image": "/Faculty/sir.jpg",
+    "bio": "Pioneering technical excellence and empowering students to compete at international hackathons.",
+    "linkedin": "https://linkedin.com",
+    "email": "mentor@iste.org"
+  },
+
+  {
+    "id": "eb-1",
+    "name": "Arjitesh Sharma",
+    "role": "President",
+    "section": "eb",
+    "department": "Computer Science Engineering",
+    "image": "/EB/Arjites.jpg",
+    "bio": "Leading overall strategy, chapter operations, and technological vision for ISTE.",
+    "linkedin": "https://linkedin.com",
+    "github": "https://github.com"
+  },
+  {
+    "id": "eb-2",
+    "name": "Arshia Kaur",
+    "role": "Vice President",
+    "section": "eb",
+    "department": "Information Technology",
+    "image": "/EB/Arshia.jpg",
+    "bio": "Overseeing inter-domain coordination, student mentorship, and strategic growth.",
+    "linkedin": "https://linkedin.com",
+    "github": "https://github.com"
+  },
+  {
+    "id": "eb-3",
+    "name": "Aryan Malhotra",
+    "role": "General Secretary",
+    "section": "eb",
+    "department": "Computer Science Engineering",
+    "image": "/EB/Aryan.jpg",
+    "bio": "Managing official communications, event logistics, and institutional relationships.",
+    "linkedin": "https://linkedin.com",
+    "github": "https://github.com"
+  },
+  {
+    "id": "eb-4",
+    "name": "Ashit Kumar",
+    "role": "Technical Lead",
+    "section": "eb",
+    "department": "Software Engineering",
+    "image": "/EB/Ashit.jpg",
+    "bio": "Spearheading chapter web applications, open source projects, and tech workshops.",
+    "linkedin": "https://linkedin.com",
+    "github": "https://github.com"
+  },
+  {
+    "id": "eb-5",
+    "name": "Divyam Mehta",
+    "role": "Operations Head",
+    "section": "eb",
+    "department": "Data Science",
+    "image": "/EB/Divyam.jpg",
+    "bio": "Ensuring smooth execution of hackathons, symposiums, and daily logistics.",
+    "linkedin": "https://linkedin.com",
+    "github": "https://github.com"
+  },
+  {
+    "id": "eb-6",
+    "name": "Geetika Verma",
+    "role": "Creative Director",
+    "section": "eb",
+    "department": "UI/UX & Multimedia",
+    "image": "/EB/Geetika.jpg",
+    "bio": "Directing visual brand identity, UI/UX aesthetics, and creative campaigns.",
+    "linkedin": "https://linkedin.com"
+  },
+  {
+    "id": "eb-7",
+    "name": "Happy Singh",
+    "role": "Treasurer",
+    "section": "eb",
+    "department": "Finance & Analytics",
+    "image": "/EB/Happy_.jpg",
+    "bio": "Managing budget allocations, sponsorship funds, and financial audits.",
+    "linkedin": "https://linkedin.com"
+  },
+  {
+    "id": "eb-8",
+    "name": "Manya Kapoor",
+    "role": "Public Relations Head",
+    "section": "eb",
+    "department": "Corporate Relations",
+    "image": "/EB/Manya.jpg",
+    "bio": "Driving external outreach, community partnerships, and industry sponsors.",
+    "linkedin": "https://linkedin.com"
+  },
+  {
+    "id": "eb-9",
+    "name": "Meher Sethi",
+    "role": "Event Manager",
+    "section": "eb",
+    "department": "Events & Operations",
+    "image": "/EB/Meher.jpg",
+    "bio": "Curating engaging tech events, guest speaker lineups, and venue management.",
+    "linkedin": "https://linkedin.com"
+  },
+  {
+    "id": "eb-10",
+    "name": "Molika Jain",
+    "role": "Content & Editorial Lead",
+    "section": "eb",
+    "department": "Media & Editorial",
+    "image": "/EB/Molika.jpg",
+    "bio": "Crafting technical newsletters, event coverage, and official publication material.",
+    "linkedin": "https://linkedin.com"
+  },
+  {
+    "id": "eb-11",
+    "name": "Nishika Gupta",
+    "role": "Corporate Affairs Lead",
+    "section": "eb",
+    "department": "Management & Outreach",
+    "image": "/EB/Nishika.jpg",
+    "bio": "Establishing corporate networking, sponsor alliances, and career fairs.",
+    "linkedin": "https://linkedin.com"
+  },
+
+  {
+    "id": "core-1",
+    "name": "Abhinav Singh",
+    "role": "Full Stack Developer",
+    "section": "core",
+    "image": "/Core/Abhinav.jpg",
+    "linkedin": "https://linkedin.com",
+    "github": "https://github.com"
+  },
+  {
+    "id": "core-2",
+    "name": "Armaan Gupta",
+    "role": "UI/UX Designer",
+    "section": "core",
+    "image": "/Core/Armaan Gupta.jpeg",
+    "linkedin": "https://linkedin.com"
+  },
+  {
+    "id": "core-3",
+    "name": "Bhavya Tech",
+    "role": "Web Developer",
+    "section": "core",
+    "image": "/Core/BHavya.jpeg",
+    "linkedin": "https://linkedin.com",
+    "github": "https://github.com"
+  },
+  {
+    "id": "core-4",
+    "name": "Gauri Sharma",
+    "role": "Content Specialist",
+    "section": "core",
+    "image": "/Core/Gauri.jpg",
+    "linkedin": "https://linkedin.com"
+  },
+  {
+    "id": "core-5",
+    "name": "Harshil Gupta",
+    "role": "Embedded Engineer",
+    "section": "core",
+    "image": "/Core/Harshil.jpg",
+    "linkedin": "https://linkedin.com",
+    "github": "https://github.com"
+  },
+  {
+    "id": "core-6",
+    "name": "Ihit Kumar",
+    "role": "AI/ML Associate",
+    "section": "core",
+    "image": "/Core/Ihit.jpg",
+    "linkedin": "https://linkedin.com",
+    "github": "https://github.com"
+  },
+  {
+    "id": "core-7",
+    "name": "Lakshita Sharma",
+    "role": "Flutter Developer",
+    "section": "core",
+    "image": "/Core/Lakshita.jpg",
+    "linkedin": "https://linkedin.com",
+    "github": "https://github.com"
+  },
+  {
+    "id": "core-8",
+    "name": "Raghav Verma",
+    "role": "Frontend Engineer",
+    "section": "core",
+    "image": "/Core/Raghav.jpg",
+    "linkedin": "https://linkedin.com",
+    "github": "https://github.com"
+  },
+  {
+    "id": "core-9",
+    "name": "Rishita Oberoi",
+    "role": "Event Coordinator",
+    "section": "core",
+    "image": "/Core/Rishita.jpeg",
+    "linkedin": "https://linkedin.com"
+  },
+  {
+    "id": "core-10",
+    "name": "Rumani Chawla",
+    "role": "Graphic Designer",
+    "section": "core",
+    "image": "/Core/Rumani.jpg",
+    "linkedin": "https://linkedin.com"
+  },
+  {
+    "id": "core-11",
+    "name": "Shubh Gupta",
+    "role": "Cybersecurity Lead",
+    "section": "core",
+    "image": "/Core/Shubh.jpg",
+    "linkedin": "https://linkedin.com",
+    "github": "https://github.com"
+  },
+  {
+    "id": "core-12",
+    "name": "Siddhant Jindal",
+    "role": "Tech Member",
+    "section": "core",
+    "image": "/Core/Siddhant Jindal.jpeg",
+    "linkedin": "https://linkedin.com",
+    "github": "https://github.com"
+  },
+  {
+    "id": "core-13",
+    "name": "Supurna Ray",
+    "role": "PR Associate",
+    "section": "core",
+    "image": "/Core/Supurna.jpeg",
+    "linkedin": "https://linkedin.com"
+  },
+  {
+    "id": "core-14",
+    "name": "Vidyanshi Mathur",
+    "role": "Media Lead",
+    "section": "core",
+    "image": "/Core/Vidyanshi.png",
+    "linkedin": "https://linkedin.com"
+  },
+  {
+    "id": "core-15",
+    "name": "Yugamdeep Goyal",
+    "role": "Systems Associate",
+    "section": "core",
+    "image": "/Core/Yugamdeep Goyal.jpg",
+    "linkedin": "https://linkedin.com",
+    "github": "https://github.com"
+  },
+  {
+    "id": "core-16",
+    "name": "Mohit Bansal",
+    "role": "DevOps Associate",
+    "section": "core",
+    "image": "/Core/mohit.jpg",
+    "linkedin": "https://linkedin.com",
+    "github": "https://github.com"
+  },
+
+  {
+    "id": "alum-1",
+    "name": "Ayush Garg",
+    "role": "Past President",
+    "section": "alumni",
+    "batch": "Batch of 2024",
+    "company": "Google",
+    "position": "Software Engineer II",
+    "image": "/Alumni/AYUSHGARG.jpg",
+    "linkedin": "https://linkedin.com"
+  },
+  {
+    "id": "alum-2",
+    "name": "Abhivinesh Sharma",
+    "role": "Past Tech Head",
+    "section": "alumni",
+    "batch": "Batch of 2024",
+    "company": "Microsoft",
+    "position": "Software Engineer",
+    "image": "/Alumni/AbhivineshSharma.jpg",
+    "linkedin": "https://linkedin.com"
+  },
+  {
+    "id": "alum-3",
+    "name": "Bhavya Alumni",
+    "role": "Past Vice President",
+    "section": "alumni",
+    "batch": "Batch of 2023",
+    "company": "Amazon",
+    "position": "Product Manager",
+    "image": "/Alumni/Bhavya.jpg",
+    "linkedin": "https://linkedin.com"
+  },
+  {
+    "id": "alum-4",
+    "name": "Garv Chopra",
+    "role": "Past AI Lead",
+    "section": "alumni",
+    "batch": "Batch of 2024",
+    "company": "Meta",
+    "position": "Research Engineer",
+    "image": "/Alumni/Garvchopra.jpg",
+    "linkedin": "https://linkedin.com"
+  },
+  {
+    "id": "alum-5",
+    "name": "Haryiank Kumra",
+    "role": "Past Secretary",
+    "section": "alumni",
+    "batch": "Batch of 2023",
+    "company": "Atlassian",
+    "position": "Full Stack Engineer",
+    "image": "/Alumni/HARYIANKKUMRA.jpg",
+    "linkedin": "https://linkedin.com"
+  },
+  {
+    "id": "alum-6",
+    "name": "Ishaan Sharma",
+    "role": "Past Tech Lead",
+    "section": "alumni",
+    "batch": "Batch of 2024",
+    "company": "Tech Startup",
+    "position": "Co-Founder & CTO",
+    "image": "/Alumni/IshaanSharma.jpg",
+    "linkedin": "https://linkedin.com"
+  },
+  {
+    "id": "alum-7",
+    "name": "Ishita Oberoi",
+    "role": "Past Design Lead",
+    "section": "alumni",
+    "batch": "Batch of 2023",
+    "company": "Adobe",
+    "position": "UX Architect",
+    "image": "/Alumni/IshitaOberoi.jpg",
+    "linkedin": "https://linkedin.com"
+  },
+  {
+    "id": "alum-8",
+    "name": "Kaushik Arora",
+    "role": "Past Web Lead",
+    "section": "alumni",
+    "batch": "Batch of 2023",
+    "company": "Uber",
+    "position": "Senior SDE",
+    "image": "/Alumni/KaushikArora.jpg",
+    "linkedin": "https://linkedin.com"
+  },
+  {
+    "id": "alum-9",
+    "name": "Lakshita Gupta",
+    "role": "Past PR Lead",
+    "section": "alumni",
+    "batch": "Batch of 2024",
+    "company": "Deloitte",
+    "position": "Cloud Consultant",
+    "image": "/Alumni/LakshitaGupta.jpg",
+    "linkedin": "https://linkedin.com"
+  },
+  {
+    "id": "alum-10",
+    "name": "Saarthi",
+    "role": "Past Core Member",
+    "section": "alumni",
+    "batch": "Batch of 2023",
+    "company": "Goldman Sachs",
+    "position": "Quantitative Analyst",
+    "image": "/Alumni/Saarthi.jpeg",
+    "linkedin": "https://linkedin.com"
+  },
+  {
+    "id": "alum-11",
+    "name": "Sakshat Jain",
+    "role": "Past Operations Lead",
+    "section": "alumni",
+    "batch": "Batch of 2024",
+    "company": "Uber",
+    "position": "Software Engineer",
+    "image": "/Alumni/SakshatJain.jpg",
+    "linkedin": "https://linkedin.com"
+  },
+  {
+    "id": "alum-12",
+    "name": "Tanishq Soni",
+    "role": "Past DevOps Lead",
+    "section": "alumni",
+    "batch": "Batch of 2024",
+    "company": "Oracle",
+    "position": "DevOps Specialist",
+    "image": "/Alumni/TanishqSoni.jpg",
+    "linkedin": "https://linkedin.com"
+  }
+]
