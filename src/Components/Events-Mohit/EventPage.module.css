@@ -398,18 +398,18 @@
 }
 
 /* ══════════════════════════════════════════════
-   EVENT CARD
+   EVENT CARD - OPTIMIZED SILKY SMOOTH
 ══════════════════════════════════════════════ */
 .eventCard {
   position: relative;
   cursor: default;
   display: flex;
   flex-direction: column;
-  perspective: 1000px;
   overflow: visible !important;
+  will-change: transform;
 }
 
-/* Middle Layer: Continuous soft floating animation */
+/* Middle Layer */
 .cardFloat {
   display: flex;
   flex-direction: column;
@@ -418,15 +418,7 @@
   overflow: visible;
 }
 
-/* Enable idle floating animation only on desktop/hover devices for optimal performance */
-@media (hover: hover) and (min-width: 769px) {
-  .cardFloat {
-    animation: float 6s ease-in-out infinite;
-    animation-delay: var(--float-delay, 0s);
-  }
-}
-
-/* Inner Layer: Handles 3D tilt, glassmorphism, border, and shadows */
+/* Inner Layer */
 .cardInner {
   position: relative;
   display: flex;
@@ -434,56 +426,22 @@
   justify-content: space-between;
   height: 100%;
   width: 100%;
-  min-height: 520px; /* Ensures all cards have identical height by default */
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px);
-  overflow: visible;
-  transform-style: preserve-3d;
-  
-  /* Refined 280ms duration with ease-out curve */
-  transition: 
-    box-shadow 280ms cubic-bezier(0.16, 1, 0.3, 1), 
-    border-radius 0.25s ease,
-    transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform;
+  min-height: 500px;
+  border-radius: 20px;
+  background: #0F172A;
+  border: 1px solid #1E293B;
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* On hover on desktop, apply perspective rotation, scale (1.01), rotation (0.6deg), and lift (9px) */
-@media (hover: hover) and (min-width: 769px) {
-  .cardInner {
-    transform: 
-      translate3d(0, var(--hover-y, 0px), 0px)
-      scale(var(--hover-scale, 1))
-      rotateX(var(--tilt-x, 0deg)) 
-      rotateY(var(--tilt-y, 0deg)) 
-      rotateZ(var(--hover-rotate, 0deg))
-      translateZ(0px);
-  }
-  .cardInner:hover {
-    --hover-y: -9px; /* Lift card upward by 8–10px */
-    --hover-scale: 1.01; /* Subtle zoom */
-    --hover-rotate: 0.6deg; /* Subtle rotation */
-  }
+.cardInner:hover {
+  border-color: #38BDF8;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
-/* Idle floating animation keyframes */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-4px); /* subtle 3-5px float */
-  }
-}
-
-/* Fallback hover effect for mobile/non-hover devices */
-@media (hover: none) or (max-width: 768px) {
-  .eventCard:hover {
-    transform: translateY(-8px);
-    transition: transform 0.3s ease;
-  }
+/* Simple clean hover */
+.eventCard:hover {
+  transition: transform 0.25s ease, border-color 0.25s ease;
 }
 
 /* Spotlight overlay */
@@ -638,56 +596,64 @@
 }
 
 /* "View Gallery" button */
+.photosBtn,
 .readMoreBtn {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.6rem 1.3rem;
+  gap: 0.25rem;
+  padding: 0.35rem 0.85rem;
   border-radius: 100px;
   border: 1px solid var(--btn-color);
   background: color-mix(in srgb, var(--btn-color) 15%, transparent);
   color: #fff;
-  font-size: 0.82rem;
+  font-size: 0.72rem;
   font-weight: 600;
   cursor: pointer;
   letter-spacing: 0.02em;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
   position: relative;
   overflow: hidden;
 }
+.photosBtn::before,
 .readMoreBtn::before {
   content: '';
   position: absolute;
   inset: 0;
   background: var(--btn-color);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.25s ease;
   border-radius: inherit;
 }
+.photosBtn:hover::before,
 .readMoreBtn:hover::before {
   opacity: 0.18;
 }
+.cardInner:hover .photosBtn,
 .cardInner:hover .readMoreBtn {
-  box-shadow: 0 0 14px color-mix(in srgb, var(--btn-color) 35%, transparent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--btn-color) 35%, transparent);
 }
+.photosBtn:hover,
 .readMoreBtn:hover {
-  animation: btnPulse 1.8s infinite ease-in-out;
-  transform: translateY(-2px) scale(1.04);
+  transform: translateY(-1px) scale(1.02);
 }
+.photosBtn:active,
 .readMoreBtn:active {
   transform: translateY(0) scale(0.97);
   transition-duration: 0.1s;
 }
+.photosBtn svg,
 .readMoreBtn svg {
-  width: 16px; height: 16px;
+  width: 12px; height: 12px;
   fill: currentColor;
   transition: transform 0.25s ease;
   position: relative;
   z-index: 1;
 }
+.photosBtn:hover svg,
 .readMoreBtn:hover svg {
-  transform: translateX(3px);
+  transform: translateX(2px);
 }
+.photosBtn span,
 .readMoreBtn span {
   position: relative;
   z-index: 1;

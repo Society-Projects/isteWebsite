@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import isteLogo from "../assets/iste-logo.png";
+import { GithubIcon, LinkedinIcon, InstagramIcon } from "./SocialIcons";
 
 // Navbar links (Removed 'About')
 const navItems = ["Home", "Events", "Team", "Sponsors", "Projects", "Contact"];
@@ -17,8 +18,9 @@ const footerQuickLinks = [
 ];
 
 const socials = [
-  { icon: "in", label: "LinkedIn", url: "https://linkedin.com" },
-  { icon: "ig", label: "Instagram", url: "https://instagram.com" },
+  { icon: GithubIcon, label: "GitHub", url: "https://github.com/ISTE-Thapar-Chapter" },
+  { icon: LinkedinIcon, label: "LinkedIn", url: "https://www.linkedin.com/company/iste-thapar/" },
+  { icon: InstagramIcon, label: "Instagram", url: "https://www.instagram.com/iste_tiet/" },
 ];
 
 function NavbarFooter({ children }) {
@@ -115,7 +117,7 @@ function NavbarFooter({ children }) {
       left: 0,
       width: `${scrollProgress}%`,
       height: "3px",
-      background: "linear-gradient(90deg, #00F0FF, #005CFF)",
+      background: "#0EA5E9",
       zIndex: 10000,
       transition: "width 0.1s linear",
     },
@@ -129,9 +131,9 @@ function NavbarFooter({ children }) {
       justifyContent: "space-between",
       padding: "0 40px",
       height: scrolled ? "70px" : "88px",
-      background: scrolled ? "rgba(0, 0, 0, 0.94)" : "rgba(0, 0, 0, 0.5)",
+      background: scrolled ? "#070D19" : "rgba(7, 13, 25, 0.8)",
       backdropFilter: "blur(18px)",
-      borderBottom: scrolled ? "1px solid rgba(0, 240, 255, 0.18)" : "1px solid rgba(255, 255, 255, 0.05)",
+      borderBottom: scrolled ? "1px solid #1E293B" : "1px solid rgba(255, 255, 255, 0.05)",
       boxShadow: scrolled ? "0 10px 30px rgba(0,0,0,0.8)" : "none",
       boxSizing: "border-box",
       zIndex: 9999,
@@ -150,7 +152,6 @@ function NavbarFooter({ children }) {
       height: scrolled ? "44px" : "52px",
       objectFit: "contain",
       transition: "all 0.3s ease",
-      filter: "drop-shadow(0 0 10px rgba(0, 240, 255, 0.3))",
     },
     brandText: {
       display: "flex",
@@ -168,7 +169,7 @@ function NavbarFooter({ children }) {
       fontStyle: "italic",
       fontWeight: 600,
       fontSize: "0.75rem",
-      color: "#00F0FF",
+      color: "#38BDF8",
       letterSpacing: "0.05em",
     },
     navList: {
@@ -190,13 +191,17 @@ function NavbarFooter({ children }) {
       transition: "all 0.25s ease",
       cursor: "pointer",
       textTransform: "capitalize",
+      userSelect: "none",
+      WebkitUserSelect: "none",
+      caretColor: "transparent",
+      outline: "none",
     },
     mainContent: {
       width: "100%",
     },
     footer: {
-      background: "#030712",
-      borderTop: "1px solid rgba(0, 240, 255, 0.2)",
+      background: "#070D19",
+      borderTop: "1px solid #1E293B",
       padding: "44px 40px 24px",
     },
     footerInner: {
@@ -220,7 +225,7 @@ function NavbarFooter({ children }) {
       gap: "36px",
     },
     heading: {
-      color: "#00F0FF",
+      color: "#38BDF8",
       marginBottom: "14px",
       fontWeight: 800,
       fontSize: "0.88rem",
@@ -444,24 +449,24 @@ function NavbarFooter({ children }) {
             </div>
 
             <div>
-              <h2 style={styles.heading}>Contact Us</h2>
-              <p style={styles.text}>
-                Thapar Institute of Engineering & Technology, Patiala, Punjab
-              </p>
-              <div style={styles.socialContainer}>
-                {socials.map((s) => (
-                  <a
-                    key={s.label}
-                    href={s.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="social-icon"
-                    style={styles.social}
-                    title={s.label}
-                  >
-                    {s.icon}
-                  </a>
-                ))}
+              <h2 style={styles.heading}>Connect With Us</h2>
+              <div className="flex flex-col gap-3 mt-3">
+                {socials.map((s) => {
+                  const Icon = s.icon;
+                  return (
+                    <a
+                      key={s.label}
+                      href={s.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="group flex items-center gap-3 px-4 py-2.5 rounded-xl bg-white/[0.04] border border-slate-800 hover:border-slate-700 hover:bg-slate-800 text-slate-300 hover:text-white transition-all duration-300 shadow-sm"
+                      title={s.label}
+                    >
+                      <Icon className="w-4 h-4 text-sky-400 group-hover:scale-110 transition-transform duration-300" />
+                      <span className="text-xs font-semibold tracking-wide">{s.label}</span>
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </div>

@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Sparkles, ArrowRight, Code, Users, Lightbulb, Cpu, ShieldCheck, Palette, Layers, Award, CheckCircle2 } from "lucide-react";
+
 // 🖼️ LOCAL PHOTO ASSETS INTEGRATION
 import teamPhoto from "../assets/team.jpg";
 import orientationPhoto from "../assets/orientation.JPG";
@@ -7,30 +10,65 @@ import orientationPhoto from "../assets/orientation.JPG";
 // 🛠️ INTERNAL CLASSNAMES JOINER
 const cn = (...classes) => classes.filter(Boolean).join(" ");
 
+import { Gamepad2 } from "lucide-react";
+
+const DOMAINS = [
+  {
+    title: "Software Engineering & Web Dev",
+    icon: Code,
+    desc: "Architecting modern full-stack web applications, REST/GraphQL APIs, and open-source tools.",
+    badge: "Technical Core"
+  },
+  {
+    title: "Artificial Intelligence & ML",
+    icon: Cpu,
+    desc: "Exploring neural networks, natural language models, and data-driven intelligent algorithms.",
+    badge: "Research & ML"
+  },
+  {
+    title: "Game Dev & Interactive Media",
+    icon: Gamepad2,
+    desc: "Building immersive 3D games, real-time physics engines, interactive graphics, and multi-platform experiences.",
+    badge: "Game Dev"
+  },
+  {
+    title: "Design & Media Aesthetics",
+    icon: Palette,
+    desc: "Crafting intuitive visual systems, brand identities, motion graphics, and UI/UX design components.",
+    badge: "Creative"
+  }
+];
+
+const STATS = [
+  { value: "150+", label: "Active Members", desc: "Engineers across batch cohorts" },
+  { value: "15+", label: "Core Repositories", desc: "Production-ready open source projects" },
+  { value: "100%", label: "Student Driven", desc: "Built & managed natively by students" }
+];
+
 // 📝 DATA LAYER
 const defaultSections = [
   {
     id: "hero",
     title: "ISTE",
     subtitle: "Thapar Chapter",
-    description: "We are a dynamic community dedicated to fostering technical prowess, hosting rigorous algorithmic challenges, and building a bridge between academic learning and software innovation.",
+    description: "A premier student-led technical society committed to fostering software engineering excellence, technical innovation, algorithmic problem-solving, and leadership at Thapar Institute.",
     align: "left",
     actions: [
-      { label: "Begin Journey", variant: "primary", href: "/#about" },
-      { label: "Our Team", variant: "secondary", href: "/team" },
+      { label: "Explore About Us", variant: "primary", href: "/#about" },
+      { label: "Meet Our Team", variant: "secondary", href: "/team" },
     ]
   },
   {
     id: "about",
-    badge: "About Us",
-    title: "About Us",
-    description: "A vibrant student chapter dedicated to fostering innovation, collaboration, and technical excellence. Our mission is to empower students through workshops, events, and hands-on projects, building a strong community of future leaders in technology.",
+    badge: "Who We Are",
+    title: "INNOVATING AT THE INTERSECTION OF TECHNOLOGY & LEADERSHIP",
+    description: "Indian Society for Technical Education (ISTE) Thapar Chapter empowers students through hands-on technical workshops, national hackathons, developer mentorship, and industry-grade engineering projects.",
     align: "center",
     isAboutSection: true,
     highlights: [
-      { title: "💡 INNOVATION HUB" },
-      { title: "</> HANDS ON CODING" },
-      { title: "👥 COMMUNITY DRIVEN" }
+      { title: "INNOVATION HUB", icon: Lightbulb },
+      { title: "HANDS ON CODING", icon: Code },
+      { title: "COMMUNITY DRIVEN", icon: Users }
     ],
     actions: [
       { label: "Meet Our Team", variant: "primary", href: "/team" }
@@ -38,15 +76,16 @@ const defaultSections = [
   },
   {
     id: "events",
-    badge: "Events",
-    title: "Upcoming Events",
-    description: "Join our exciting events designed to enhance your technical skills, expand your network, and provide hands-on experience with the latest technologies.",
+    badge: "Flagship Events",
+    title: "UPCOMING & PAST KEY MILESTONES",
+    description: "Join our signature hackathons, orientation sessions, and expert-led tech bootcamps built to accelerate your engineering career.",
     align: "center",
     isEventsSection: true,
     eventsList: [
       {
         title: "ORIENTATION 2026",
-        description: "Welcome to the ISTE Community!\nThe orientation welcomed our new members into the ISTE family, introducing them to our vision, initiatives, and exciting projects. Together, we look forward to fostering innovation, collaboration, and growth as we shape the future of technology."
+        badge: "Featured Event",
+        description: " Welcoming our newest cohort into the ISTE family. Introducing students to our engineering verticals, open-source projects, and collaborative technical community."
       }
     ],
     actions: [
@@ -55,77 +94,31 @@ const defaultSections = [
   },
   {
     id: "projects",
-    badge: "Projects",
-    title: "Our Innovations &",
-    subtitle: "Repositories",
-    description: "Explore the wide spectrum of robust web platforms built natively by our core development teams.",
+    badge: "Our Ecosystem",
+    title: "INNOVATIONS & DEVELOPER REPOSITORIES",
+    description: "Discover robust web platforms, financial tools, and campus management utilities built by our core technical team.",
     align: "center",
     isGrid: true,
     features: [
-      { title: "Fairfare", tag: "WEB PLATFORM", description: "Fair-fare is a web platform that lets users compare real-time taxi fares across different apps." },
-      { title: "Time Capsule", tag: "UTILITY APP", description: "Write messages to yourself or friends that only become viewable after X days." },
-      { title: "Society Sphere", tag: "MANAGEMENT PORTAL", description: "Streamlined web platform built to empower student societies by simplifying event workflows." },
-      { title: "FinTech", tag: "FINANCE SYSTEM", description: "Track spending, income, and expenses; monitor investments with personalized advice." }
+      { title: "Society Tracker", tag: "MANAGEMENT PORTAL", description: "Streamlined web platform simplifying event workflows and recruitment pipelines for campus societies." },
+      { title: "Fairfare", tag: "WEB PLATFORM", description: "Real-time taxi and ride-hailing fare aggregator enabling instant route fare comparisons." },
+      { title: "Time Capsule", tag: "UTILITY APP", description: "Encrypted memory-vault web application locking digital messages until a designated date." },
+      { title: "FinTech Dashboard", tag: "FINANCE SYSTEM", description: "Comprehensive personal finance monitor with spending telemetry and portfolio tracking." }
     ]
   }
 ];
 
 export default function HomeGauri({ sections = defaultSections, className }) {
-  const [activeSection, setActiveSection] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [visibleSections, setVisibleSections] = useState({});
 
   const containerRef = useRef(null);
-  const sectionRefs = useRef([]);
   const animationFrameId = useRef(null);
-
-  // 🌊 BUTTERY SMOOTH SCROLLING — native smooth scroll for anchor jumps
-  useEffect(() => {
-    const prevBehavior = document.documentElement.style.scrollBehavior;
-    document.documentElement.style.scrollBehavior = "smooth";
-    return () => {
-      document.documentElement.style.scrollBehavior = prevBehavior;
-    };
-  }, []);
-
-  // ✨ SCROLL-REVEAL — sections gently fade + rise into view as you scroll
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVisibleSections((prev) => ({ ...prev, [entry.target.dataset.sectionId]: true }));
-          }
-        });
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
-    );
-    sectionRefs.current.forEach((el) => el && observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
 
   const updateScrollPosition = useCallback(() => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const progress = docHeight > 0 ? Math.min(Math.max(scrollTop / docHeight, 0), 1) : 0;
     setScrollProgress(progress);
-
-    const viewportCenter = window.innerHeight / 2;
-    let newActiveSection = 0;
-    let minDistance = Infinity;
-
-    sectionRefs.current.forEach((ref, index) => {
-      if (ref) {
-        const rect = ref.getBoundingClientRect();
-        const sectionCenter = rect.top + rect.height / 2;
-        const distance = Math.abs(sectionCenter - viewportCenter);
-        if (distance < minDistance) {
-          minDistance = distance;
-          newActiveSection = index;
-        }
-      }
-    });
-    setActiveSection(newActiveSection);
   }, []);
 
   useEffect(() => {
@@ -148,193 +141,291 @@ export default function HomeGauri({ sections = defaultSections, className }) {
   }, [updateScrollPosition]);
 
   return (
-    /* 🌌 MAIN BACKGROUND: Pure Pitch Black */
     <div
       ref={containerRef}
-      style={{ fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif" }}
-      className={cn("relative w-full overflow-x-hidden min-h-screen bg-transparent text-gray-200 antialiased selection:bg-[#00F0FF]/20", className)}
+      className={cn("relative w-full overflow-x-hidden min-h-screen bg-transparent text-gray-200 antialiased selection:bg-[#00F0FF]/25", className)}
     >
-      {/* Dynamic Background Glows */}
-      <div className="absolute top-[15%] left-[5%] w-[30rem] h-[30rem] bg-[#0B3D91]/10 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute top-[60%] right-[5%] w-[35rem] h-[35rem] bg-[#00F0FF]/10 rounded-full blur-[180px] pointer-events-none" />
-
-      {/* 🧭 TOP PROGRESS LINE (#00F0FF Glow Accent) */}
-      <div className="fixed top-0 left-0 w-full h-[2px] bg-black/40 z-50">
+      {/* 🧭 Smooth Scroll Progress Indicator */}
+      <div className="fixed top-0 left-0 w-full h-[3px] bg-slate-900 z-[10000]">
         <div
-          className="h-full bg-[#00F0FF] shadow-[0_0_12px_#00F0FF]"
+          className="h-full bg-sky-500"
           style={{
             transform: `scaleX(${scrollProgress})`,
             transformOrigin: 'left center',
-            transition: 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)'
+            transition: 'transform 0.1s ease-out'
           }}
         />
       </div>
 
       {/* ================= SECTIONS CANVAS ================= */}
       <div className="relative z-10 w-full">
-        {sections.map((section, index) => (
+        {sections.map((section) => (
           <section
             key={section.id}
             id={section.id}
-            data-section-id={section.id}
-            ref={(el) => { sectionRefs.current[index] = el; }}
             className={cn(
-              "min-h-screen w-full flex flex-col justify-center px-6 md:px-16 lg:px-32 pt-24 pb-20 border-b border-white/5 scroll-mt-16",
-              "transition-all duration-1000 ease-out",
-              visibleSections[section.id] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10",
-              section.align === 'center' ? "items-center text-center" : "items-start text-left md:pl-28"
+              "min-h-screen w-full flex flex-col justify-center px-6 md:px-16 lg:px-28 pt-28 pb-20 border-b border-white/5 scroll-mt-16",
+              section.id === "hero"
+                ? "items-center lg:items-start text-center lg:text-left"
+                : section.align === 'center'
+                ? "items-center text-center"
+                : "items-start text-left"
             )}
           >
-            <div className={cn("w-full space-y-8", section.id === "hero" ? "max-w-6xl" : (section.align === 'center' ? "max-w-4xl mx-auto" : "max-w-4xl"))}>
+            <div className={cn("w-full space-y-8", section.id === "hero" ? "max-w-6xl mx-auto" : (section.align === 'center' ? "max-w-4xl mx-auto" : "max-w-4xl"))}>
 
               {/* HERO SPECIFIC CUSTOM LAYOUT */}
               {section.id === "hero" ? (
-                <div className="w-full flex flex-col lg:flex-row items-start justify-between gap-10 lg:gap-16">
-                  {/* Left Column: Indian Society for Technical Education */}
-                  <div className="flex-1 flex flex-col items-start select-none w-full">
-                    <h1 className="font-display text-4xl sm:text-6xl lg:text-[4.4rem] font-extrabold tracking-tight leading-[1.02] text-white uppercase flex flex-col">
-                      <span className="text-white">Indian</span>
-                      <span className="text-[#00F0FF]">Society for</span>
-                      <span className="text-white">Technical</span>
-                      <span className="text-[#00F0FF]">Education</span>
+                <motion.div 
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  className="w-full flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16"
+                >
+                  {/* Left Column: Heading in ALL CAPS */}
+                  <div className="flex-1 flex flex-col items-center lg:items-start select-none w-full text-center lg:text-left">
+                    <h1 className="font-display text-3xl sm:text-5xl lg:text-[3.8rem] font-black tracking-tight leading-[1.08] text-white uppercase flex flex-col gap-1">
+                      <span>INDIAN SOCIETY FOR</span>
+                      <span className="text-sky-400">TECHNICAL EDUCATION</span>
                     </h1>
 
-                    {/* ✍️ THAPAR CHAPTER Tag */}
-                    <div className="flex justify-start mt-4 pl-1">
-                      <span
-                        className="block font-display font-bold text-lg sm:text-2xl text-[#00F0FF] tracking-[0.15em] uppercase drop-shadow-[0_0_12px_rgba(0,240,255,0.4)]"
-                      >
-                        THAPAR CHAPTER
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Right Column: Welcome Batch, Description, Actions */}
-                  <div className="flex-1 flex flex-col items-start space-y-6 text-left select-none w-full lg:pt-4">
-                    <div className="pt-2">
-                      <h2 className="font-display text-lg sm:text-2xl font-bold tracking-[0.12em] uppercase text-[#00F0FF]">
-                        WELCOME BATCH OF 2030
-                      </h2>
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 mt-6 mb-4">
+                      <Sparkles className="w-3.5 h-3.5 text-sky-400" />
+                      <span className="text-xs font-semibold tracking-wider text-sky-400 uppercase">Thapar Chapter</span>
                     </div>
 
-                    <p className="text-slate-300 font-normal leading-relaxed text-base md:text-lg tracking-normal max-w-xl">
-                      {section.description}
+                    <p className="text-sky-400 font-bold text-sm sm:text-base tracking-[0.2em] uppercase">
+                      INNOVATE • BUILD • EXCEL
                     </p>
-
-                    {/* Actions / Buttons */}
-                    {section.actions && (
-                      <div className="flex flex-wrap gap-4 pt-2">
-                        {section.actions.map((act) => (
-                          act.href ? (
-                            act.href.startsWith("http") || act.href.includes("#") ? (
-                              <a key={act.label} href={act.href} className="btn-primary-glow inline-block">
-                                {act.label}
-                              </a>
-                            ) : (
-                              <Link key={act.label} to={act.href} className="btn-primary-glow inline-block">
-                                {act.label}
-                              </Link>
-                            )
-                          ) : (
-                            <button key={act.label} className="btn-primary-glow">
-                              {act.label}
-                            </button>
-                          )
-                        ))}
-                      </div>
-                    )}
                   </div>
-                </div>
-              ) : (
-                <>
 
-                  {section.subtitle && (
-                    <h2 className="page-heading text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.05] text-white uppercase">
-                      <span className="block mb-1">{section.title}</span>
-                      <span className="block bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] via-[#00B4D8] to-[#0B3D91]">
-                        {section.subtitle}
-                      </span>
-                    </h2>
-                  )}
-                  {!section.subtitle && (
-                    <div className={cn("w-full space-y-3", section.align === 'center' ? "flex flex-col items-center" : "")}>
-                      <h2 className="page-heading text-3xl sm:text-5xl font-extrabold tracking-tight text-white uppercase">
-                        {section.title}
-                      </h2>
-                      <div className={cn("h-[3px] bg-gradient-to-r from-[#00F0FF] via-[#00B4D8] to-[#0B3D91] rounded-full", section.align === 'center' ? "w-20 mx-auto" : "w-16")} />
+                  {/* Right Column: Clean Welcome Batch (No Box, Centered) */}
+                  <div className="flex-1 flex flex-col items-center text-center w-full">
+                    <div className="w-full space-y-6 relative overflow-hidden flex flex-col items-center">
+                      <div className="space-y-3 flex flex-col items-center">
+                        <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-sky-400 tracking-tight uppercase text-center">
+                          WELCOME BATCH OF 2030
+                        </h2>
+                        <p className="text-slate-300 font-normal leading-relaxed text-sm sm:text-base max-w-xl mx-auto text-center">
+                          We are a dynamic community dedicated to fostering technical prowess, hosting rigorous algorithmic challenges, and building a bridge between academic learning and software innovation.
+                        </p>
+                      </div>
+                      <div className="flex flex-wrap justify-center gap-4 pt-1">
+                        <Link to="/events" className="btn-primary-glow text-xs uppercase tracking-wider font-bold">
+                          <span>BEGIN JOURNEY</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                        <Link to="/team" className="btn-secondary-glow text-xs uppercase tracking-wider font-bold">
+                          <span>OUR TEAM</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </div>
                     </div>
+                  </div>
+                </motion.div>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="space-y-6 w-full"
+                >
+                  {section.badge && (
+                    <span className="inline-block px-3.5 py-1 rounded-full text-[11px] font-semibold tracking-wider text-sky-400 bg-slate-800/80 border border-slate-700 uppercase">
+                      {section.badge}
+                    </span>
                   )}
-                </>
+                  <h2 className="page-heading text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight uppercase">
+                    {section.title}
+                  </h2>
+                  <div className={cn("h-1 bg-sky-500 rounded-full", section.align === 'center' ? "w-20 mx-auto" : "w-16")} />
+                </motion.div>
               )}
 
               {/* ABOUT SECTION PHOTOGRAPHY */}
               {section.id !== "hero" && section.isAboutSection && (
-                <div className="w-full max-w-lg mx-auto rounded-2xl overflow-hidden border border-[#00F0FF]/20 bg-[#0D1524] p-1.5 shadow-2xl my-6">
-                  <img src={teamPhoto} alt="Core Team" className="w-full h-auto rounded-xl object-cover max-h-[220px]" />
-                </div>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6 }}
+                  className="w-full max-w-xl mx-auto rounded-2xl overflow-hidden border border-slate-800 bg-[#0F172A] p-2 shadow-xl my-6"
+                >
+                  <img src={teamPhoto} alt="Core Team" className="w-full h-auto rounded-xl object-cover max-h-[320px] object-top" />
+                </motion.div>
               )}
 
               {section.id !== "hero" && (
-                <p className={cn("text-slate-300 font-normal leading-relaxed text-base md:text-lg tracking-normal", section.align === 'center' ? "max-w-2xl mx-auto" : "max-w-2xl")}>
+                <motion.p
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.5 }}
+                  className={cn("text-slate-300 font-normal leading-relaxed text-base md:text-lg tracking-normal", section.align === 'center' ? "max-w-2xl mx-auto" : "max-w-2xl")}
+                >
                   {section.description}
-                </p>
+                </motion.p>
               )}
 
-              {/* EVENTS SECTION LAYOUT */}
-              {section.isEventsSection && section.eventsList && (
-                <div className="w-full max-w-3xl mx-auto bg-gradient-to-tr from-[#041C4A] via-[#00B4D8] to-[#0B3D91] p-[1.5px] rounded-2xl shadow-2xl mt-10 transition-all duration-300 hover:shadow-[0_0_35px_rgba(0,240,255,0.18)] group">
-                  <div className="w-full bg-[#0D1524] rounded-[15px] p-6 md:p-8 flex flex-col items-center justify-center gap-6 text-center">
-                    <div className="w-full max-w-sm aspect-[16/9] rounded-xl overflow-hidden border border-white/10 bg-slate-950">
-                      <img src={orientationPhoto} alt="Orientation session" className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500" />
-                    </div>
-                    <div className="w-full space-y-3">
-                      <span className="font-display inline-block px-3 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-[#02040A] text-[#00F0FF] border border-[#00F0FF]/30 rounded-full">Featured Milestone</span>
-                      <h3 className="font-display text-xl font-bold tracking-wide text-white uppercase">{section.eventsList[0].title}</h3>
-                      <p className="text-slate-300 font-normal text-sm md:text-base leading-relaxed tracking-normal">{section.eventsList[0].description}</p>
+              {/* 🌟 IMPACT STATS & DOMAIN VERTICALS SHOWCASE */}
+              {section.id === "about" && (
+                <div className="w-full max-w-5xl mx-auto pt-8 space-y-12">
+                  {/* Stats Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
+                    {STATS.map((stat, idx) => (
+                      <motion.div
+                        key={stat.label}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.45, delay: idx * 0.08 }}
+                        whileHover={{ y: -3 }}
+                        className="p-5 rounded-xl bg-[#0F172A] border border-slate-800 text-center shadow-md hover:border-slate-700 transition-all duration-300"
+                      >
+                        <span className="font-display text-3xl sm:text-4xl font-extrabold text-sky-400 block">
+                          {stat.value}
+                        </span>
+                        <span className="font-display text-xs font-bold text-white uppercase tracking-wider block mt-1">
+                          {stat.label}
+                        </span>
+                        <span className="text-[10px] text-slate-400 font-normal block mt-0.5">
+                          {stat.desc}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {/* Technical Verticals Showcase */}
+                  <div className="space-y-6">
+                    <motion.div
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4 }}
+                      className="text-center space-y-2"
+                    >
+                      <span className="text-[10px] font-bold text-sky-400 tracking-widest uppercase px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700">
+                        Our Engineering Verticals
+                      </span>
+                      <h3 className="font-display text-2xl font-bold text-white uppercase">Areas of Specialized Focus</h3>
+                    </motion.div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+                      {DOMAINS.map((domain, idx) => {
+                        const Icon = domain.icon;
+                        return (
+                          <motion.div
+                            key={domain.title}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.2 }}
+                            transition={{ duration: 0.45, delay: idx * 0.08 }}
+                            whileHover={{ y: -3 }}
+                            className="p-6 rounded-xl bg-[#0F172A] border border-slate-800 hover:border-slate-700 transition-all duration-300 flex items-start gap-4 group cursor-default"
+                          >
+                            <div className="p-3 rounded-lg bg-slate-800 text-sky-400 shrink-0 group-hover:bg-sky-500 group-hover:text-white transition-all duration-300">
+                              <Icon className="w-6 h-6" />
+                            </div>
+                            <div className="space-y-1">
+                              <span className="text-[9px] font-bold text-sky-400 uppercase tracking-wider block">{domain.badge}</span>
+                              <h4 className="font-display text-base font-bold text-white group-hover:text-sky-400 transition-colors">{domain.title}</h4>
+                              <p className="text-xs text-slate-300 leading-relaxed font-normal">{domain.desc}</p>
+                            </div>
+                          </motion.div>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
               )}
 
-              {/* DYNAMIC METRICS HOVER CLIPS */}
-              {section.highlights && (
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl pt-2 mx-auto">
-                  {section.highlights.map((high) => (
-                    <div key={high.title} className="p-4 rounded-xl bg-[#0D1524] backdrop-blur-sm text-center flex items-center justify-center gap-3 shadow-md border border-[#00F0FF]/15 hover:border-[#00F0FF]/40 transition-all duration-300">
-                      <span className="text-[#00F0FF] text-sm">{high.title.includes("CODING") ? "</>" : (high.title.includes("HUB") ? "💡" : "👥")}</span>
-                      <span className="font-display text-slate-200 font-bold text-xs tracking-widest uppercase">{high.title.replace("💡 ", "").replace("</> ", "").replace("👥 ", "")}</span>
+              {/* EVENTS SECTION LAYOUT */}
+              {section.isEventsSection && section.eventsList && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.55 }}
+                  className="w-full max-w-3xl mx-auto rounded-xl border border-slate-800 bg-[#0F172A] p-6 md:p-8 shadow-xl mt-8"
+                >
+                  <div className="flex flex-col items-center justify-center gap-6 text-center">
+                    <div className="w-full max-w-md aspect-[16/9] rounded-lg overflow-hidden border border-slate-800 bg-slate-950">
+                      <img src={orientationPhoto} alt="Orientation session" className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500" />
                     </div>
-                  ))}
+                    <div className="w-full space-y-3">
+                      <span className="inline-block px-3 py-1 text-[10px] font-semibold uppercase tracking-widest bg-slate-800 text-sky-400 border border-slate-700 rounded-full">
+                        {section.eventsList[0].badge}
+                      </span>
+                      <h3 className="font-display text-2xl font-bold tracking-tight text-white uppercase">{section.eventsList[0].title}</h3>
+                      <p className="text-slate-300 font-normal text-sm md:text-base leading-relaxed">{section.eventsList[0].description}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* DYNAMIC HIGHLIGHTS */}
+              {section.highlights && (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl pt-4 mx-auto">
+                  {section.highlights.map((high, idx) => {
+                    const Icon = high.icon || Sparkles;
+                    return (
+                      <motion.div
+                        key={high.title}
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.4, delay: idx * 0.08 }}
+                        whileHover={{ y: -3 }}
+                        className="p-5 rounded-xl bg-[#0F172A] text-center flex items-center justify-center gap-3 shadow-md border border-slate-800 hover:border-slate-700 transition-all duration-300"
+                      >
+                        <div className="p-2 rounded-lg bg-slate-800 text-sky-400">
+                          <Icon className="w-5 h-5" />
+                        </div>
+                        <span className="font-display text-slate-200 font-bold text-xs tracking-wider uppercase">{high.title}</span>
+                      </motion.div>
+                    );
+                  })}
                 </div>
               )}
 
               {/* PROJECTS GRID SYSTEM */}
               {section.features && !section.isEventsSection && (
-                <div className={cn("grid gap-5 pt-2 w-full", section.isGrid ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1")}>
-                  {section.features.map((feat) => (
-                    <div key={feat.title} className="p-[1.5px] rounded-2xl bg-gradient-to-b from-[#0B3D91] via-[#00B4D8] to-[#041C4A] shadow-xl group transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,240,255,0.18)]">
-                      <div className="p-6 md:p-8 rounded-[14px] bg-[#0D1524] relative overflow-hidden flex flex-col items-center justify-center text-center min-h-[190px]">
-                        {feat.tag && <span className="font-display text-[9px] font-bold text-[#00F0FF] tracking-[0.2em] uppercase mb-2 block">{feat.tag}</span>}
-                        <h3 className="font-display text-lg font-bold tracking-wide text-white group-hover:text-[#00F0FF] transition-colors mb-2.5 uppercase">{feat.title}</h3>
-                        <p className="text-slate-300 font-normal text-sm leading-relaxed tracking-normal">{feat.description}</p>
+                <div className={cn("grid gap-6 pt-4 w-full", section.isGrid ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1")}>
+                  {section.features.map((feat, idx) => (
+                    <motion.div
+                      key={feat.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.45, delay: idx * 0.1 }}
+                      whileHover={{ y: -3 }}
+                      className="p-6 md:p-8 rounded-xl bg-[#0F172A] border border-slate-800 shadow-md group transition-all duration-300 hover:border-slate-700 text-left"
+                    >
+                      <div>
+                        {feat.tag && <span className="text-[10px] font-bold text-sky-400 tracking-wider uppercase mb-2 block">{feat.tag}</span>}
+                        <h3 className="font-display text-xl font-bold tracking-tight text-white group-hover:text-sky-400 transition-colors mb-2 uppercase">{feat.title}</h3>
+                        <p className="text-slate-300 font-normal text-sm leading-relaxed">{feat.description}</p>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               )}
 
-              {/* GENERIC TRIGGER BUTTONS */}
+              {/* ACTION BUTTONS */}
               {section.id !== "hero" && section.actions && (
-                <div className={cn("flex flex-wrap gap-4 pt-4 w-full", section.align === 'center' ? "justify-center" : "justify-start")}>
+                <div className={cn("flex flex-wrap gap-4 pt-6 w-full", section.align === 'center' ? "justify-center" : "justify-start")}>
                   {section.actions.map((act) => {
                     return act.href ? (
                       act.href.startsWith("http") || act.href.includes("#") ? (
-                        <a key={act.label} href={act.href} className="btn-primary-glow inline-block">
+                        <a key={act.label} href={act.href} className="btn-primary-glow">
                           {act.label}
+                          <ArrowRight className="w-4 h-4" />
                         </a>
                       ) : (
-                        <Link key={act.label} to={act.href} className="btn-primary-glow inline-block">
+                        <Link key={act.label} to={act.href} className="btn-primary-glow">
                           {act.label}
+                          <ArrowRight className="w-4 h-4" />
                         </Link>
                       )
                     ) : (
@@ -348,8 +439,8 @@ export default function HomeGauri({ sections = defaultSections, className }) {
             </div>
           </section>
         ))}
-
       </div>
     </div>
   );
 }
+
