@@ -2,6 +2,20 @@ export const CATEGORIES = ["All", "Web Platforms", "Management Portals", "Utilit
 
 export const projects = [
   {
+    id: "timetable-app",
+    title: "Timetable App",
+    category: "Utility Apps",
+    tag: "STUDENT UTILITY",
+    featured: true,
+    description: "Interactive student timetable dashboard designed to view schedules, find free slot overlaps between student batches, export schedules to Google Calendar, and operate offline-first.",
+    tech: ["React.js", "Vite", "TailwindCSS", "Service Workers", "Google Calendar API"],
+    website: "/timetable",
+    github: "https://github.com/ISTE-Thapar-Chapter/timetable",
+    testId: "",
+    password: "",
+    metrics: "Offline PWA & Calendar Sync"
+  },
+  {
     id: "society-tracker",
     title: "Society Tracker",
     category: "Management Portals",
