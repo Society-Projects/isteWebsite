@@ -4,7 +4,7 @@ import isteLogo from "../assets/iste-logo.png";
 import { GithubIcon, LinkedinIcon, InstagramIcon } from "./SocialIcons";
 
 // Navbar links (Removed 'About')
-const navItems = ["Home", "Events", "Team", "Sponsors", "Projects", "Contact"];
+const navItems = ["Home", "Events", "Team", "Sponsors", "Projects", "Time Table", "Contact"];
 
 // Footer Quick Links (Removed 'About')
 const footerQuickLinks = [
@@ -13,6 +13,7 @@ const footerQuickLinks = [
   { label: "Events", key: "events" },
   { label: "Sponsors", key: "sponsors" },
   { label: "Projects", key: "projects" },
+  { label: "Time Table", key: "timetable" },
   { label: "Alumni", key: "alumni" },
   { label: "Contact Us", key: "contact" },
 ];
@@ -83,6 +84,12 @@ function NavbarFooter({ children }) {
 
     if (key === "alumni" || key === "alumini") {
       navigate("/alumni");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    if (key === "timetable") {
+      navigate("/timetable");
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
