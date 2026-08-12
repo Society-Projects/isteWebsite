@@ -1,10 +1,7 @@
 import { motion } from "framer-motion";
+import { LinkedinIcon } from "../../SocialIcons";
+import { ExternalLink, Code } from "lucide-react";
 
-/**
- * Portfolio-style masonry card for the core team. `aspect` varies the
- * image's height so the CSS-columns masonry grid reads as hand-curated
- * rather than uniform.
- */
 function CoreCard({ core, index = 0, aspect = "aspect-[3/4]" }) {
   const { image, name, linkedin } = core;
 
@@ -12,46 +9,67 @@ function CoreCard({ core, index = 0, aspect = "aspect-[3/4]" }) {
     <motion.article
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.5, delay: (index % 6) * 0.06, ease: "easeOut" }}
-      className="glow-border group mb-5 break-inside-avoid overflow-hidden rounded-xl bg-surface"
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.45, delay: (index % 6) * 0.04, ease: [0.16, 1, 0.3, 1] }}
+      whileHover={{ y: -3 }}
+      className="group relative overflow-hidden rounded-2xl border border-slate-800 bg-[#0F172A] p-4 text-center space-y-3.5 hover:border-slate-700 transition-all duration-300 shadow-md w-full max-w-[280px] flex flex-col justify-between"
     >
-      <div className={`relative w-full overflow-hidden ${aspect}`}>
-        {image ? (
-          <img
-            src={image}
-            alt={`Portrait of ${name}`}
-            loading="lazy"
-            className="h-full w-full object-cover grayscale transition-all duration-500 group-hover:scale-105 group-hover:grayscale-0"
-          />
-        ) : (
-          <div
-            role="img"
-            aria-label={`Portrait placeholder for ${name}`}
-            className="flex h-full w-full items-center justify-center bg-gradient-to-br from-darkblue-700/40 to-surface font-display text-2xl text-white/20"
-          >
-            {name
-              .split(" ")
-              .map((w) => w[0])
-              .join("")}
-          </div>
-        )}
+      {/* Photo Frame Container - Padded frame ring with object-top */}
+      <div className="relative w-full rounded-xl overflow-hidden bg-[#070D19] border border-slate-800 p-1 group-hover:border-slate-700 transition-colors">
+        <div className={`relative w-full rounded-lg overflow-hidden ${aspect} bg-slate-900`}>
+          {image ? (
+            <img
+              src={image}
+              alt={`Portrait of ${name}`}
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+            />
+          ) : (
+            <div
+              role="img"
+              aria-label={`Portrait placeholder for ${name}`}
+              className="flex h-full w-full items-center justify-center font-display text-3xl font-bold text-slate-500"
+            >
+              {name
+                .split(" ")
+                .map((w) => w[0])
+                .join("")}
+            </div>
+          )}
 
-        {/* bottom gradient + info, revealed on hover */}
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-4 pt-10">
-          <h3 className="font-display text-sm font-semibold text-white sm:text-base">
+          {/* Top Pill Tag */}
+          <div className="absolute top-2 left-2 z-10">
+            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-900/90 backdrop-blur-md border border-slate-700 text-[9px] font-bold text-sky-400 uppercase tracking-wider shadow-sm">
+              <Code className="w-2.5 h-2.5" />
+              <span>Core Team</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Info & LinkedIn Button */}
+      <div className="space-y-2.5 pt-0.5 flex flex-col items-center">
+        <div>
+          <h3 className="font-display text-base font-bold text-white tracking-tight group-hover:text-sky-400 transition-colors">
             {name}
           </h3>
+          <span className="text-[10px] text-slate-400 font-mono block mt-0.5">Core Contributor</span>
+        </div>
+
+        {linkedin && (
           <a
             href={linkedin}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`View ${name}'s LinkedIn profile`}
-            className="mt-1 inline-flex items-center gap-1 text-xs text-white/50 opacity-0 transition-opacity duration-300 hover:text-neon-blue focus-visible:text-neon-blue group-hover:opacity-100"
+            className="btn-secondary-glow w-full text-center py-1.5 text-[11px] flex items-center justify-center gap-1.5 group/btn"
           >
-            View LinkedIn ↗
+            <LinkedinIcon className="w-3 h-3 text-sky-400" />
+            <span>LinkedIn Profile</span>
+            <ExternalLink className="w-2.5 h-2.5 group-hover/btn:translate-x-0.5 transition-transform" />
           </a>
-        </div>
+        )}
       </div>
     </motion.article>
   );

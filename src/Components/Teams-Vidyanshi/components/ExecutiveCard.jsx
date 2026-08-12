@@ -1,48 +1,43 @@
 import { motion } from "framer-motion";
+import { LinkedinIcon } from "../../SocialIcons";
+import { ExternalLink, Shield } from "lucide-react";
 
-/**
- * NFT-collectible-styled executive card: square portrait, thin gradient
- * border, holographic hover glow, LinkedIn as the card's primary action.
- */
 function ExecutiveCard({ executive, index = 0 }) {
   const { image, name, position, linkedin } = executive;
 
   return (
     <motion.article
-      initial={{ opacity: 0, scale: 0.94 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.5, delay: (index % 4) * 0.08, ease: "easeOut" }}
-      className="group relative rounded-2xl p-[1px] transition-transform duration-300 hover:-translate-y-1.5"
-      style={{
-        background:
-          "linear-gradient(135deg, rgba(0,180,216,0.5), rgba(0,240,255,0.3))",
-      }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.45, delay: (index % 4) * 0.04, ease: [0.16, 1, 0.3, 1] }}
+      whileHover={{ y: -3 }}
+      className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-800 bg-[#0F172A] p-4 text-center space-y-3.5 hover:border-slate-700 transition-all duration-300 w-full max-w-[280px] shadow-md"
     >
-      <div className="glass-panel relative flex h-full flex-col overflow-hidden rounded-2xl">
-        {/* corner ticks, collectible framing */}
-        <span
-          aria-hidden="true"
-          className="absolute left-3 top-3 h-3 w-3 border-l border-t border-neon-blue/50"
-        />
-        <span
-          aria-hidden="true"
-          className="absolute right-3 top-3 h-3 w-3 border-r border-t border-neon-blue/50"
-        />
+      {/* Top Header: Centered Position Badge */}
+      <div className="flex items-center justify-center">
+        <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-slate-800 border border-slate-700 text-[10px] font-bold text-sky-400 uppercase tracking-wider">
+          <Shield className="w-3 h-3" />
+          <span>{position}</span>
+        </span>
+      </div>
 
-        <div className="relative aspect-square w-full overflow-hidden bg-gradient-to-br from-darkblue-900/40 to-surface">
+      {/* Photo Frame Container - Padded frame ring with object-top */}
+      <div className="relative w-full rounded-xl overflow-hidden bg-[#070D19] border border-slate-800 p-1 group-hover:border-slate-700 transition-colors">
+        <div className="relative aspect-[3/4] w-full rounded-lg overflow-hidden bg-slate-900">
           {image ? (
             <img
               src={image}
               alt={`Portrait of ${name}`}
               loading="lazy"
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+              decoding="async"
+              className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
             />
           ) : (
             <div
               role="img"
               aria-label={`Portrait placeholder for ${name}`}
-              className="flex h-full w-full items-center justify-center font-display text-3xl text-white/20"
+              className="flex h-full w-full items-center justify-center font-display text-4xl font-extrabold text-slate-500"
             >
               {name
                 .split(" ")
@@ -50,43 +45,31 @@ function ExecutiveCard({ executive, index = 0 }) {
                 .join("")}
             </div>
           )}
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 opacity-0 mix-blend-overlay transition-opacity duration-500 group-hover:opacity-100"
-            style={{
-              background:
-                "linear-gradient(120deg, rgba(11,61,145,0.5), rgba(0,240,255,0.4))",
-            }}
-          />
         </div>
+      </div>
 
-        <div className="flex flex-1 flex-col gap-1 p-5">
-          <h3 className="font-display text-lg font-semibold text-white">
+      {/* Info & LinkedIn Link */}
+      <div className="space-y-2.5">
+        <div>
+          <h3 className="font-display text-base font-bold text-white tracking-tight group-hover:text-sky-400 transition-colors">
             {name}
           </h3>
-          <p className="font-mono text-xs uppercase tracking-wide text-neon-blue/80">
-            {position}
-          </p>
+          <span className="text-[10px] text-slate-400 font-mono block mt-0.5">Executive Board Member</span>
+        </div>
 
+        {linkedin && (
           <a
             href={linkedin}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`View ${name}'s LinkedIn profile`}
-            className="mt-3 inline-flex w-fit items-center gap-2 rounded-full border border-white/15 px-3 py-1.5 text-xs text-white/70 transition-colors duration-300 hover:border-neon-blue/60 hover:text-neon-blue focus-visible:border-neon-blue/60 focus-visible:text-neon-blue"
+            className="btn-secondary-glow w-full text-center py-1.5 text-[11px] flex items-center justify-center gap-1.5 group/btn"
           >
-            <svg
-              aria-hidden="true"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45z" />
-            </svg>
-            LinkedIn
+            <LinkedinIcon className="w-3 h-3 text-sky-400" />
+            <span>Connect on LinkedIn</span>
+            <ExternalLink className="w-2.5 h-2.5 group-hover/btn:translate-x-0.5 transition-transform" />
           </a>
-        </div>
+        )}
       </div>
     </motion.article>
   );

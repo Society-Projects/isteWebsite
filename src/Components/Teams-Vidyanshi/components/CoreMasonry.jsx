@@ -1,14 +1,7 @@
 import CoreCard from "./CoreCard.jsx";
 
-const ASPECTS = [
-  "aspect-[3/4]",
-  "aspect-square",
-  "aspect-[4/5]",
-  "aspect-[3/5]",
-];
-
 /**
- * Renders the core team masonry. Pure function of `data`.
+ * Renders the core team grid with centered alignment and uniform portrait frames.
  */
 function CoreMasonry({ data }) {
   if (!data?.length) {
@@ -20,14 +13,15 @@ function CoreMasonry({ data }) {
   }
 
   return (
-    <div className="columns-1 gap-5 sm:columns-2 lg:columns-3 xl:columns-4">
+    <div className="flex flex-wrap justify-center gap-6 max-w-7xl mx-auto items-stretch">
       {data.map((member, index) => (
-        <CoreCard
-          key={member.name}
-          core={member}
-          index={index}
-          aspect={ASPECTS[index % ASPECTS.length]}
-        />
+        <div key={member.name} className="w-full sm:w-[calc(50%-12px)] md:w-[calc(33.333%-16px)] lg:w-[calc(25%-18px)] flex justify-center">
+          <CoreCard
+            core={member}
+            index={index}
+            aspect="aspect-[3/4]"
+          />
+        </div>
       ))}
     </div>
   );

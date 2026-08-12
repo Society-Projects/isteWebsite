@@ -61,92 +61,19 @@ const SUB_EVENT_ICONS = {
 /* ─── Single Event Card ─── */
 function EventCard({ event, index, onViewPhotos, disableGallery }) {
   const glow = GLOWS[index % GLOWS.length];
-  const cardRef = useRef(null);
-  const imgRef = useRef(null);
-  const [hovered, setHovered] = useState(false);
   const [subEventsOpen, setSubEventsOpen] = useState(false);
   const [imgLoaded, setImgLoaded] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Check if device is mobile or has no hover support to disable 3D tilt/floating effects
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 768px), (hover: none)');
-    setIsMobile(mediaQuery.matches);
-    const handler = (e) => setIsMobile(e.matches);
-    mediaQuery.addEventListener('change', handler);
-    return () => mediaQuery.removeEventListener('change', handler);
-  }, []);
-
-  // Safeguard cached images or placeholders loaded before React mounts
-  useEffect(() => {
-    if (imgRef.current && imgRef.current.complete) {
-      setImgLoaded(true);
-    }
-  }, []);
-
-  const handleMouseMove = useCallback((e) => {
-    if (isMobile || !cardRef.current) return;
-    const card = cardRef.current;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const width = rect.width;
-    const height = rect.height;
-
-    // Normalize coordinates to range between -0.5 and 0.5
-    const normalizedX = (x / width) - 0.5;
-    const normalizedY = (y / height) - 0.5;
-
-    // Gently tilt card by maximum 6–8 degrees (using 7deg)
-    const maxTilt = 7;
-    const tiltX = normalizedY * -maxTilt;
-    const tiltY = normalizedX * maxTilt;
-
-    // Calculate subtle parallax translations (moving opposite/slower)
-    const parallaxX = normalizedX * -10;
-    const parallaxY = normalizedY * -10;
-
-    // Calculate glow position in percentages
-    const glowX = (x / width) * 100;
-    const glowY = (y / height) * 100;
-
-    // Apply CSS custom properties directly to the DOM node for maximum rendering speed
-    card.style.setProperty('--tilt-x', `${tiltX}deg`);
-    card.style.setProperty('--tilt-y', `${tiltY}deg`);
-    card.style.setProperty('--parallax-x', `${parallaxX}px`);
-    card.style.setProperty('--parallax-y', `${parallaxY}px`);
-    card.style.setProperty('--glow-x', `${glowX}%`);
-    card.style.setProperty('--glow-y', `${glowY}%`);
-    card.style.setProperty('--glow-opacity', '1');
-  }, [isMobile]);
-
-  const handleMouseLeave = useCallback(() => {
-    if (isMobile || !cardRef.current) return;
-    const card = cardRef.current;
-
-    // Smoothly reset tilt and parallax positions when mouse leaves
-    card.style.setProperty('--tilt-x', '0deg');
-    card.style.setProperty('--tilt-y', '0deg');
-    card.style.setProperty('--parallax-x', '0px');
-    card.style.setProperty('--parallax-y', '0px');
-    card.style.setProperty('--glow-opacity', '0');
-  }, [isMobile]);
 
   return (
     <motion.article
-      ref={cardRef}
       className={styles.eventCard}
-      initial={{ opacity: 0, y: 50, scale: 0.96, filter: 'blur(8px)' }}
-      whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.65, delay: index * 0.08, ease: [0.25, 1, 0.5, 1] }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      onHoverStart={() => !isMobile && setHovered(true)}
-      onHoverEnd={() => !isMobile && setHovered(false)}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.45, delay: (index % 3) * 0.08, ease: [0.16, 1, 0.3, 1] }}
+      whileHover={{ y: -6 }}
       style={{
         '--glow-color': glow.color,
-        '--float-delay': `${index * -0.8}s`,
         ...(subEventsOpen && {
           zIndex: 10,
         }),
@@ -155,158 +82,126 @@ function EventCard({ event, index, onViewPhotos, disableGallery }) {
       role="article"
       aria-label={event.title}
     >
-      {/* Middle Layer: Continuous soft float animation */}
-      <div className={styles.cardFloat}>
-        {/* Inner Layer: Handles 3D tilt, borders, shadows and preserve-3d */}
-        <div
-          className={styles.cardInner}
-          style={{
-            boxShadow: hovered
-              ? `0 35px 80px rgba(0,0,0,0.7), ${glow.shadow.replace('0.4', '0.85').replace('0.2', '0.5')}`
-              : `0 10px 40px rgba(0,0,0,0.35), ${glow.shadow}`,
-          }}
-        >
-          {/* Spotlight layer */}
-          <div
-            className={styles.spotlight}
-            style={{
-              background: `radial-gradient(320px circle at var(--glow-x, 50%) var(--glow-y, 50%), ${glow.color}22, transparent 65%)`,
-              opacity: 'var(--glow-opacity, 0)',
+      <div className={styles.cardInner}>
+        {/* Glowing border accent */}
+        <div className={styles.glowBorder} style={{ '--glow-color': glow.color }} aria-hidden="true" />
+
+        {/* Cover image container */}
+        <div className={styles.cardImageWrap}>
+          <img
+            src={event.photos[0]?.src}
+            alt={event.title}
+            className={`${styles.cardCoverImg} ${imgLoaded ? styles.imgLoaded : ''}`}
+            loading="lazy"
+            decoding="async"
+            onLoad={() => setImgLoaded(true)}
+            data-testid={`event-image-${event.id}`}
+            draggable="false"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = `https://placehold.co/800x450/0f0f1a/4b5563?text=${encodeURIComponent(event.title)}`;
+              setImgLoaded(true);
             }}
-            aria-hidden="true"
           />
+          <div className={styles.imgGradient} />
+        </div>
 
-          {/* Glowing border pseudo-element via inline var */}
-          <div className={styles.glowBorder} style={{ '--glow-color': glow.color }} aria-hidden="true" />
+        {/* Category badge */}
+        <div
+          className={styles.categoryBadge}
+          style={{ '--badge-color': glow.color }}
+          data-testid={`event-category-${event.id}`}
+        >
+          {event.category}
+        </div>
 
-          {/* Cover image wrap with parallax outer wrapper */}
-          <div className={styles.cardImageWrap}>
-            <div className={styles.cardImageParallax}>
-              <motion.img
-                ref={imgRef}
-                src={event.photos[0]?.src}
-                alt={event.title}
-                className={`${styles.cardCoverImg} ${imgLoaded ? styles.imgLoaded : ''}`}
-                animate={{ scale: hovered ? 1.03 : 1 }}
-                transition={{ duration: 0.28, ease: 'easeOut' }}
-                loading="lazy"
-                onLoad={() => setImgLoaded(true)}
-                data-testid={`event-image-${event.id}`}
-                draggable="false"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = `https://placehold.co/800x450/0f0f1a/4b5563?text=${encodeURIComponent(event.title)}`;
-                  setImgLoaded(true);
-                }}
-              />
-              {/* Dark gradient overlay */}
-              <div className={styles.imgGradient} />
-            </div>
-          </div>
-
-          {/* Category badge - placed as direct child of cardInner for 3D translateZ support */}
-          <div
-            className={styles.categoryBadge}
-            style={{ '--badge-color': glow.color }}
-            data-testid={`event-category-${event.id}`}
-          >
-            {event.category}
-          </div>
-
-          {/* Card body */}
-          <div className={styles.cardBody}>
-            <div className={styles.cardTitleRow}>
-              <h3 className={styles.cardTitle} data-testid={`event-title-${event.id}`}>
-                {event.title}
-              </h3>
-              {event.subEvents && (
-                <button
-                  className={styles.subEventsChip}
-                  style={{ '--btn-color': glow.color }}
-                  onClick={() => setSubEventsOpen((o) => !o)}
-                  aria-expanded={subEventsOpen}
-                  data-testid={`sub-events-toggle-${event.id}`}
-                  title="View sub-events"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M12 2l1.5 4.5L18 8l-4.5 1.5L12 14l-1.5-4.5L6 8l4.5-1.5L12 2zM5 15l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3zM19 15l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3z" />
-                  </svg>
-                  <span>{event.subEvents.length} sub-events</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
-                    style={{ transform: subEventsOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease', width: '11px', height: '11px', fill: 'rgba(255,255,255,0.5)', flexShrink: 0 }}
-                  >
-                    <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
-                  </svg>
-                </button>
-              )}
-            </div>
-
-            <div className={styles.cardMeta}>
-              <span className={styles.metaItem}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z" /></svg>
-                {event.location.split(',')[0]}
-              </span>
-              <span className={styles.metaItem}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" /></svg>
-                {event.date}
-              </span>
-              <span className={styles.attendeeChip} style={{ '--chip-color': glow.color }}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z" /></svg>
-                <strong>{event.attendees.toLocaleString()}</strong> attended
-              </span>
-            </div>
-
-            <p className={styles.cardDescription} data-testid={`event-description-${event.id}`}>
-              {event.description}
-            </p>
-          </div>
-
-          {/* Sub-events accordion panel – placed inside cardInner */}
-          {event.subEvents && (
-            <div
-              className={`${styles.subEventsPanel} ${subEventsOpen ? styles.subEventsExpanded : ''}`}
-              style={{ '--glow-color': glow.color }}
-            >
-              {event.subEvents.map((sub) => (
-                <div
-                  key={sub.title}
-                  className={styles.subEventCard}
-                  style={{ '--btn-color': glow.color }}
-                >
-                  <span className={styles.subEventTitle}>
-                    {SUB_EVENT_ICONS[sub.title] && (
-                      <span className={styles.subEventIcon} style={{ '--icon-color': glow.color }}>
-                        {SUB_EVENT_ICONS[sub.title]}
-                      </span>
-                    )}
-                    {sub.title}
-                  </span>
-                  <span className={styles.subEventDate}>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                      <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" />
-                    </svg>
-                    {sub.date}
-                  </span>
-                </div>
-              ))}
-            </div>
-          )}
-
-          <div className={styles.cardFooter}>
-            {!disableGallery && (
+        {/* Card body */}
+        <div className={styles.cardBody}>
+          <div className={styles.cardTitleRow}>
+            <h3 className={styles.cardTitle} data-testid={`event-title-${event.id}`}>
+              {event.title}
+            </h3>
+            {event.subEvents && (
               <button
-                className={styles.readMoreBtn}
+                className={styles.subEventsChip}
                 style={{ '--btn-color': glow.color }}
-                onClick={() => onViewPhotos(event, glow.color)}
-                data-testid={`photos-btn-${event.id}`}
-                aria-label={`View photos for ${event.title}`}
+                onClick={() => setSubEventsOpen((o) => !o)}
+                aria-expanded={subEventsOpen}
+                data-testid={`sub-events-toggle-${event.id}`}
+                title="View sub-events"
               >
-                <span>View Gallery</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2l1.5 4.5L18 8l-4.5 1.5L12 14l-1.5-4.5L6 8l4.5-1.5L12 2zM5 15l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3zM19 15l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3z" />
+                </svg>
+                <span>{event.subEvents.length} sub-events</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+                  style={{ transform: subEventsOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease', width: '11px', height: '11px', fill: 'rgba(255,255,255,0.5)', flexShrink: 0 }}
+                >
+                  <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+                </svg>
               </button>
             )}
           </div>
+
+          <div className={styles.cardMeta}>
+            <span className={styles.metaItem}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z" /></svg>
+              {event.location.split(',')[0]}
+            </span>
+            <span className={styles.metaItem}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" /></svg>
+              {event.date}
+            </span>
+            <span className={styles.attendeeChip} style={{ '--chip-color': glow.color }}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z" /></svg>
+              <strong>{event.attendees.toLocaleString()}</strong> attended
+            </span>
+          </div>
+
+          <p className={styles.cardDescription} data-testid={`event-description-${event.id}`}>
+            {event.description}
+          </p>
+        </div>
+
+        {/* Sub-events accordion panel */}
+        {event.subEvents && (
+          <div
+            className={`${styles.subEventsPanel} ${subEventsOpen ? styles.subEventsExpanded : ''}`}
+            style={{ '--glow-color': glow.color }}
+          >
+            {event.subEvents.map((sub) => (
+              <div
+                key={sub.title}
+                className={styles.subEventCard}
+                style={{ '--btn-color': glow.color }}
+              >
+                <span className={styles.subEventTitle}>
+                  {SUB_EVENT_ICONS[sub.title] && (
+                    <span className={styles.subEventIcon} style={{ '--icon-color': glow.color }}>
+                      {SUB_EVENT_ICONS[sub.title]}
+                    </span>
+                  )}
+                  {sub.title}
+                </span>
+                <span className={styles.subEventDate}>{sub.date}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Card footer with View Gallery button */}
+        <div className={styles.cardFooter}>
+          <button
+            className={styles.photosBtn}
+            style={{ '--btn-color': glow.color }}
+            onClick={() => onViewPhotos(event, glow.color)}
+            data-testid={`photos-btn-${event.id}`}
+            aria-label={`View photos for ${event.title}`}
+          >
+            <span>View Gallery</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z" /></svg>
+          </button>
         </div>
       </div>
     </motion.article>
