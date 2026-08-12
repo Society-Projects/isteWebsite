@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/timetable",
-      "destination": "https://timetable-2-0.vercel.app/timetable"
+      "destination": "https://timetable-2-0.vercel.app/"
     },
     {
       "source": "/timetable/:path*",
-      "destination": "https://timetable-2-0.vercel.app/timetable/:path*"
+      "destination": "https://timetable-2-0.vercel.app/:path*"
     },
     {
       "source": "/(.*)",
