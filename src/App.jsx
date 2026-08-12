@@ -8,6 +8,8 @@ import Sponsors from "./Components/Sponsors/SponsorsPage";
 import AlumniPage from "./Components/Alumni/AlumniPage";
 import ProjectsPage from "./Components/Projects/ProjectsPage";
 import { ContactPage } from "./Components/ContactPage";
+import TimetablePage from "./Components/Timetable/TimetablePage";
+
 export default function App() {
   return (
     <div className="bg-transparent min-h-screen text-gray-200 antialiased selection:bg-[#00F0FF]/20">
@@ -30,6 +32,10 @@ export default function App() {
 
           {/* 🎓 ALUMNI PAGE */}
           <Route path="/alumni" element={<AlumniPage />} />
+
+          {/* 📅 TIMETABLE PAGE */}
+          <Route path="/timetable" element={<TimetablePage />} />
+
           {/* 📞 CONTACT PAGE */}
           <Route path="/contact" element={<ContactPage />} /> 
         </Routes>
@@ -37,3 +43,5 @@ export default function App() {
     </div>
   );
 }
+
+// Force Vite HMR reload trigger - v2
