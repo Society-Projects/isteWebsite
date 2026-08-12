@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/timetable",
+      "destination": "https://timetable-2-0.vercel.app/timetable"
+    },
+    {
+      "source": "/timetable/:path*",
+      "destination": "https://timetable-2-0.vercel.app/timetable/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
