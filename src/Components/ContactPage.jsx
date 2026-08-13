@@ -56,16 +56,33 @@ export const ContactPage = () => {
     setIsSubmitting(true);
 
     try {
-      const backendUrl = import.meta.env.VITE_CONTACT_FORM_BACKEND || 'https://iste-contact-backend.onrender.com';
-      const endpoint = `${backendUrl}/api/contact`;
+      const primaryUrl = import.meta.env.VITE_CONTACT_FORM_BACKEND 
+        ? `${import.meta.env.VITE_CONTACT_FORM_BACKEND.replace(/\/+$/, '')}/api/contact`
+        : '/api/contact';
 
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      let response;
+      try {
+        response = await fetch(primaryUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+      } catch (primaryErr) {
+        // Fallback to relative path (proxied by Vercel/Vite server) if primary fetch failed
+        if (primaryUrl !== '/api/contact') {
+          response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+          });
+        } else {
+          throw primaryErr;
+        }
+      }
 
       const data = await response.json();
 
@@ -95,7 +112,7 @@ export const ContactPage = () => {
       console.error('Submission error:', err);
       setSubmitStatus({
         type: 'error',
-        message: 'Something went wrong. Please try again later.',
+        message: 'Network error: Unable to connect to backend server. Render backend may be starting up or CORS is blocked.',
       });
     } finally {
       setIsSubmitting(false);
