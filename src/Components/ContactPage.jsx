@@ -5,24 +5,118 @@ export const ContactPage = () => {
     firstName: '',
     lastName: '',
     email: '',
-    phone: '',
+    phoneNumber: '',
     message: ''
   });
+  const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = 'First name is compulsory.';
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is compulsory.';
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email.trim())) {
+        newErrors.email = 'Please enter a valid email address.';
+      }
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is compulsory.';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    // Clear error on change for field
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: null }));
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitStatus(null);
+
+    if (!validateForm()) {
+      return;
+    }
+
     setIsSubmitting(true);
 
-    setTimeout(() => {
+    try {
+      const primaryUrl = import.meta.env.VITE_CONTACT_FORM_BACKEND 
+        ? `${import.meta.env.VITE_CONTACT_FORM_BACKEND.replace(/\/+$/, '')}/api/contact`
+        : '/api/contact';
+
+      let response;
+      try {
+        response = await fetch(primaryUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+      } catch (primaryErr) {
+        // Fallback to relative path (proxied by Vercel/Vite server) if primary fetch failed
+        if (primaryUrl !== '/api/contact') {
+          response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+          });
+        } else {
+          throw primaryErr;
+        }
+      }
+
+      const data = await response.json();
+
+      if (response.ok && data.status === 'success') {
+        setSubmitStatus({
+          type: 'success',
+          message: data.message || 'Message sent successfully',
+        });
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phoneNumber: '',
+          message: '',
+        });
+        setErrors({});
+      } else {
+        if (data.details) {
+          setErrors(data.details);
+        }
+        setSubmitStatus({
+          type: 'error',
+          message: data.message || 'Failed to submit form. Please check your inputs.',
+        });
+      }
+    } catch (err) {
+      console.error('Submission error:', err);
+      setSubmitStatus({
+        type: 'error',
+        message: 'Network error: Unable to connect to backend server. Render backend may be starting up or CORS is blocked.',
+      });
+    } finally {
       setIsSubmitting(false);
-      console.log('Form Submitted:', formData);
-      alert('Message sent successfully!');
-    }, 2000);
+    }
   };
 
   return (
@@ -48,26 +142,47 @@ export const ContactPage = () => {
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+            {submitStatus && (
+              <div
+                className={`p-4 rounded-xl text-sm border flex items-center gap-3 ${
+                  submitStatus.type === 'success'
+                    ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'
+                    : 'bg-rose-500/10 border-rose-500/30 text-rose-400'
+                }`}
+              >
+                <span>{submitStatus.message}</span>
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} noValidate className="space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-wider font-semibold text-slate-400">First Name</label>
+                  <label className="text-xs uppercase tracking-wider font-semibold text-slate-400">
+                    First Name <span className="text-[#00F0FF]">*</span>
+                  </label>
                   <input
                     type="text"
                     name="firstName"
-                    required
                     placeholder="e.g. John"
                     value={formData.firstName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-[#050508] border border-white/10 rounded-xl focus:outline-none focus:border-[#00F0FF] focus:ring-1 focus:ring-[#00F0FF]/30 text-white placeholder-slate-600 transition-all shadow-inner"
+                    className={`w-full px-4 py-3 bg-[#050508] border rounded-xl focus:outline-none transition-all shadow-inner text-white placeholder-slate-600 ${
+                      errors.firstName
+                        ? 'border-rose-500/70 focus:border-rose-500 focus:ring-1 focus:ring-rose-500/30'
+                        : 'border-white/10 focus:border-[#00F0FF] focus:ring-1 focus:ring-[#00F0FF]/30'
+                    }`}
                   />
+                  {errors.firstName && (
+                    <p className="text-rose-400 text-xs mt-1">{errors.firstName}</p>
+                  )}
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-wider font-semibold text-slate-400">Last Name</label>
+                  <label className="text-xs uppercase tracking-wider font-semibold text-slate-400">
+                    Last Name
+                  </label>
                   <input
                     type="text"
                     name="lastName"
-                    required
                     placeholder="e.g. Smith"
                     value={formData.lastName}
                     onChange={handleChange}
@@ -77,41 +192,57 @@ export const ContactPage = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs uppercase tracking-wider font-semibold text-slate-400">Email Address</label>
+                <label className="text-xs uppercase tracking-wider font-semibold text-slate-400">
+                  Email Address <span className="text-[#00F0FF]">*</span>
+                </label>
                 <input
                   type="email"
                   name="email"
-                  required
                   placeholder="e.g. example@gmail.com"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-[#050508] border border-white/10 rounded-xl focus:outline-none focus:border-[#00F0FF] focus:ring-1 focus:ring-[#00F0FF]/30 text-white placeholder-slate-600 transition-all shadow-inner"
+                  className={`w-full px-4 py-3 bg-[#050508] border rounded-xl focus:outline-none transition-all shadow-inner text-white placeholder-slate-600 ${
+                    errors.email
+                      ? 'border-rose-500/70 focus:border-rose-500 focus:ring-1 focus:ring-rose-500/30'
+                      : 'border-white/10 focus:border-[#00F0FF] focus:ring-1 focus:ring-[#00F0FF]/30'
+                  }`}
                 />
+                {errors.email && (
+                  <p className="text-rose-400 text-xs mt-1">{errors.email}</p>
+                )}
               </div>
 
               <div className="space-y-2">
                 <label className="text-xs uppercase tracking-wider font-semibold text-slate-400">Phone Number</label>
                 <input
                   type="tel"
-                  name="phone"
+                  name="phoneNumber"
                   placeholder="e.g. +91 XXXXX XXXXX"
-                  value={formData.phone}
+                  value={formData.phoneNumber}
                   onChange={handleChange}
                   className="w-full px-4 py-3 bg-[#050508] border border-white/10 rounded-xl focus:outline-none focus:border-[#00F0FF] focus:ring-1 focus:ring-[#00F0FF]/30 text-white placeholder-slate-600 transition-all shadow-inner"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs uppercase tracking-wider font-semibold text-slate-400">Message</label>
+                <label className="text-xs uppercase tracking-wider font-semibold text-slate-400">
+                  Message <span className="text-[#00F0FF]">*</span>
+                </label>
                 <textarea
                   name="message"
                   rows="4"
-                  required
                   placeholder="Let us know how we can help..."
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-[#050508] border border-white/10 rounded-xl focus:outline-none focus:border-[#00F0FF] focus:ring-1 focus:ring-[#00F0FF]/30 text-white placeholder-slate-600 transition-all resize-none shadow-inner"
+                  className={`w-full px-4 py-3 bg-[#050508] border rounded-xl focus:outline-none transition-all resize-none shadow-inner text-white placeholder-slate-600 ${
+                    errors.message
+                      ? 'border-rose-500/70 focus:border-rose-500 focus:ring-1 focus:ring-rose-500/30'
+                      : 'border-white/10 focus:border-[#00F0FF] focus:ring-1 focus:ring-[#00F0FF]/30'
+                  }`}
                 ></textarea>
+                {errors.message && (
+                  <p className="text-rose-400 text-xs mt-1">{errors.message}</p>
+                )}
               </div>
 
               <button
