@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import SEO from "../SEO/SEO";
 import "./Sponsors.css";
 
 // 🖼️ STATIC IMPORT OF SPONSOR LOGOS
@@ -237,6 +238,12 @@ export default function Sponsors() {
 
   return (
     <section className="sponsors" id="sponsors">
+      <SEO
+        title="Our Sponsors & Corporate Partners | ISTE TIET"
+        description="Discover the corporate sponsors, industry partners, and organizations supporting ISTE TIET's hackathons, technical events, and student development."
+        canonicalPath="/sponsors"
+      />
+
       <div className="sponsors__bg-glow" aria-hidden="true" />
       <div className="sponsors__bg-grid" aria-hidden="true" />
 

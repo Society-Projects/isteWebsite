@@ -210,6 +210,8 @@ function EventCard({ event, index, onViewPhotos, disableGallery }) {
 
 /* PhotoModal replaced by GalleryModal (see GalleryModal.jsx) */
 
+import SEO from "../SEO/SEO";
+
 /* ─── Participant Statistics Counter ─── */
 const CountUp = ({ end }) => {
   const [count, setCount] = useState(0);
@@ -384,8 +386,41 @@ const EventsPage = () => {
     { number: '2', label: 'Speaker Sessions', testId: 'stat-speakers' },
   ];
 
+  const eventsSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "ISTE TIET Events & Workshops",
+    "itemListElement": featuredEvents.map((evt, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "Event",
+        "name": evt.title,
+        "startDate": evt.date,
+        "location": {
+          "@type": "Place",
+          "name": evt.location,
+          "address": "Thapar Institute of Engineering and Technology, Patiala"
+        },
+        "description": evt.description,
+        "organizer": {
+          "@type": "Organization",
+          "name": "ISTE TIET",
+          "url": "https://istetiet.com"
+        }
+      }
+    }))
+  };
+
   return (
     <main className={styles.eventSection}>
+      <SEO
+        title="Events & Hackathons | ISTE TIET"
+        description="Explore technical workshops, hackathons, guest lectures, orientations, and society events organized by ISTE TIET at Thapar University."
+        canonicalPath="/events"
+        schema={eventsSchema}
+      />
+
 
       {/* Cinematic ambient background lighting */}
       <div className={styles.ambientGlows} aria-hidden="true">

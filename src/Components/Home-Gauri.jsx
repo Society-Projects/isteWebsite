@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Sparkles, ArrowRight, Code, Users, Lightbulb, Cpu, ShieldCheck, Palette, Layers, Award, CheckCircle2 } from "lucide-react";
 
+import SEO from "./SEO/SEO";
+
 // 🖼️ LOCAL PHOTO ASSETS INTEGRATION
 import teamPhoto from "../assets/team.jpg";
 import orientationPhoto from "../assets/orientation.JPG";
@@ -140,11 +142,40 @@ export default function HomeGauri({ sections = defaultSections, className }) {
     };
   }, [updateScrollPosition]);
 
+  const homeSchema = {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "ISTE Students' Chapter TIET",
+    "alternateName": ["ISTE TIET", "Indian Society for Technical Education Thapar"],
+    "url": "https://istetiet.com",
+    "logo": "https://istetiet.com/istelogo.png",
+    "description": "Official Students' Chapter of Indian Society for Technical Education at Thapar Institute of Engineering and Technology, Patiala.",
+    "sameAs": [
+      "https://www.instagram.com/iste_tiet/",
+      "https://www.linkedin.com/company/iste-tiet/",
+      "https://github.com/iste-tiet"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Patiala",
+      "addressRegion": "Punjab",
+      "postalCode": "147004",
+      "addressCountry": "IN"
+    }
+  };
+
   return (
     <div
       ref={containerRef}
       className={cn("relative w-full overflow-x-hidden min-h-screen bg-transparent text-gray-200 antialiased selection:bg-[#00F0FF]/25", className)}
     >
+      <SEO
+        title="ISTE TIET - Indian Society for Technical Education | Thapar Chapter"
+        description="Official site of ISTE Students' Chapter, Thapar Institute of Engineering & Technology. Fostering technical excellence, software engineering, hackathons, and innovation."
+        canonicalPath="/"
+        schema={homeSchema}
+      />
+
       {/* 🧭 Smooth Scroll Progress Indicator */}
       <div className="fixed top-0 left-0 w-full h-[3px] bg-slate-900 z-[10000]">
         <div

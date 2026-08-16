@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Disallow administrative or build artifacts if any
+Disallow: /admin/
+Disallow: /api/
+
+Sitemap: https://istetiet.com/sitemap.xml

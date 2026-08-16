@@ -1,16 +1,15 @@
 {
-  "rewrites": [
+  "redirects": [
     {
       "source": "/timetable",
-      "destination": "https://timetable-2-0.vercel.app/"
-    },
-    {
-      "source": "/timetable/:path*",
-      "destination": "https://timetable-2-0.vercel.app/:path*"
-    },
+      "destination": "https://timetable.istetiet.com",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
     {
       "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
-}
+}

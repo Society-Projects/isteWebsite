@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SEO from './SEO/SEO';
 
 export const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -25,8 +26,23 @@ export const ContactPage = () => {
     }, 2000);
   };
 
+  const contactSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact ISTE TIET",
+    "description": "Contact page for Indian Society for Technical Education Students' Chapter at Thapar University.",
+    "url": "https://istetiet.com/contact"
+  };
+
   return (
     <div className="w-full bg-transparent text-white flex flex-col items-center justify-start p-6 md:p-12 relative overflow-hidden selection:bg-[#00F0FF]/30 selection:text-[#00F0FF]">
+      <SEO
+        title="Contact Us | ISTE TIET"
+        description="Get in touch with ISTE TIET Students' Chapter at Thapar University, Patiala. Reach out for sponsorships, collaborations, event inquiries, or membership."
+        canonicalPath="/contact"
+        schema={contactSchema}
+      />
+
 
       {/* Subtle, premium background lighting — navy/cyan glows */}
       <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-[#00F0FF]/5 rounded-full blur-[140px] pointer-events-none"></div>

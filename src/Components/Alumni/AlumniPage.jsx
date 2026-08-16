@@ -1,9 +1,16 @@
 import { alumniData } from "./alumniData.js";
 import AlumniCard from "./AlumniCard.jsx";
+import SEO from "../SEO/SEO";
 
 export default function AlumniPage() {
   return (
     <section className="relative w-full min-h-screen bg-transparent text-white pt-32 pb-24 px-6 md:px-16 lg:px-24">
+      <SEO
+        title="Alumni Network & Legacy | ISTE TIET"
+        description="Meet the alumni network of ISTE TIET, Thapar University. Discover former executive members working across global technology companies, research labs, and startups."
+        canonicalPath="/alumni"
+      />
+
       {/* Background Glows */}
       <div className="absolute top-[10%] left-[10%] w-[25rem] h-[25rem] bg-[#0B3D91]/15 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute top-[50%] right-[10%] w-[30rem] h-[30rem] bg-[#00F0FF]/10 rounded-full blur-[160px] pointer-events-none" />

@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { ExternalLink, Search, Key, ShieldCheck, Code, Layers, Globe, Star, Sparkles, Terminal, CheckCircle2 } from "lucide-react";
 import { GithubIcon } from "../SocialIcons";
 import { projects, CATEGORIES } from "./projectsData.js";
+import SEO from "../SEO/SEO";
 
 export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -36,6 +37,11 @@ export default function ProjectsPage() {
 
   return (
     <section className="relative w-full min-h-screen bg-transparent text-white pt-32 pb-24 px-6 md:px-16 lg:px-24">
+      <SEO
+        title="Open Source Projects & Innovations | ISTE TIET"
+        description="Explore production-grade open source projects, Web Apps, AI models, and student-driven innovations built by ISTE Students' Chapter at Thapar University."
+        canonicalPath="/projects"
+      />
       {/* 🧭 Smooth Scroll Progress Indicator Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-[3px] bg-sky-500 origin-left z-[10000] shadow-[0_0_10px_#0EA5E9]"

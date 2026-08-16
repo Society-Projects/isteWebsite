@@ -8,6 +8,8 @@ import Sponsors from "./Components/Sponsors/SponsorsPage";
 import AlumniPage from "./Components/Alumni/AlumniPage";
 import ProjectsPage from "./Components/Projects/ProjectsPage";
 import { ContactPage } from "./Components/ContactPage";
+import TimetableRedirect from "./Components/TimetableRedirect";
+
 export default function App() {
   return (
     <div className="bg-transparent min-h-screen text-gray-200 antialiased selection:bg-[#00F0FF]/20">
@@ -30,10 +32,16 @@ export default function App() {
 
           {/* 🎓 ALUMNI PAGE */}
           <Route path="/alumni" element={<AlumniPage />} />
+
+          {/* 📅 TIMETABLE REDIRECT */}
+          <Route path="/timetable" element={<TimetableRedirect />} />
+          
           {/* 📞 CONTACT PAGE */}
-          <Route path="/contact" element={<ContactPage />} /> 
+          <Route path="/contact" element={<ContactPage />} />
+
         </Routes>
       </NavbarFooter>
     </div>
   );
 }
+
