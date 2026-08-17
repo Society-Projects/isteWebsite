@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Sparkles, ArrowRight, Code, Users, Lightbulb, Cpu, ShieldCheck, Palette, Layers, Award, CheckCircle2 } from "lucide-react";
+import SEO from "./SEO";
 
 // 🖼️ LOCAL PHOTO ASSETS INTEGRATION
 import teamPhoto from "../assets/team.jpg";
@@ -145,6 +146,11 @@ export default function HomeGauri({ sections = defaultSections, className }) {
       ref={containerRef}
       className={cn("relative w-full overflow-x-hidden min-h-screen bg-transparent text-gray-200 antialiased selection:bg-[#00F0FF]/25", className)}
     >
+      <SEO
+        title="Home"
+        description="Official website of ISTE Thapar Chapter (TIET). Premier college society driving innovation, tech events, and engineering excellence."
+        keywords="tiet, iste, college society, thapar chapter, thapar institute of engineering and technology, thapar university"
+      />
       {/* 🧭 Smooth Scroll Progress Indicator */}
       <div className="fixed top-0 left-0 w-full h-[3px] bg-slate-900 z-[10000]">
         <div

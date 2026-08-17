@@ -1,0 +1,15 @@
+{
+    "redirects": [
+        {
+            "source": "/timetable",
+            "destination": "https://timetable.istetiet.com",
+            "permanent": true
+        }
+    ],
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/index.html"
+        }
+    ]
+}

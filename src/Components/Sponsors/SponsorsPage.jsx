@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import "./Sponsors.css";
+import SEO from "../SEO";
 
 // 🖼️ STATIC IMPORT OF SPONSOR LOGOS
 import surreyImg from "../../assets/Sponsor Images/surrey.png";
@@ -237,6 +238,11 @@ export default function Sponsors() {
 
   return (
     <section className="sponsors" id="sponsors">
+      <SEO
+        title="Our Sponsors"
+        description="Our valued industry partners and sponsors supporting ISTE Thapar Chapter (TIET) in cultivating technical excellence."
+        keywords="tiet, iste, college society, thapar chapter, sponsors, partners, industry collabs"
+      />
       <div className="sponsors__bg-glow" aria-hidden="true" />
       <div className="sponsors__bg-grid" aria-hidden="true" />
 
