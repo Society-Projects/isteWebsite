@@ -1,12 +1,13 @@
 {
-    "redirects": [
-        {
-            "source": "/timetable",
-            "destination": "https://timetable.istetiet.com",
-            "permanent": true
-        }
-    ],
   "rewrites": [
+    {
+      "source": "/timetable",
+      "destination": "https://timetable-2-0.vercel.app/"
+    },
+    {
+      "source": "/timetable/:path*",
+      "destination": "https://timetable-2-0.vercel.app/:path*"
+    },
     {
       "source": "/api/contact",
       "destination": "https://iste-contact-backend.onrender.com/api/contact"
