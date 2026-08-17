@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SEO from './SEO';
 
 export const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -27,6 +28,11 @@ export const ContactPage = () => {
 
   return (
     <div className="w-full bg-transparent text-white flex flex-col items-center justify-start p-6 md:p-12 relative overflow-hidden selection:bg-[#00F0FF]/30 selection:text-[#00F0FF]">
+      <SEO
+        title="Contact Us"
+        description="Get in touch with ISTE Thapar Chapter at TIET. Reach out for collaborations, sponsorships, or inquiries."
+        keywords="tiet, iste, college society, thapar chapter, contact us, thapar university contact"
+      />
 
       {/* Subtle, premium background lighting — navy/cyan glows */}
       <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-[#00F0FF]/5 rounded-full blur-[140px] pointer-events-none"></div>

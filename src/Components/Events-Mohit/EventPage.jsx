@@ -2,6 +2,7 @@ import { useState, useRef, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import styles from "./EventPage.module.css";
 import GalleryModal from './GalleryModal';
+import SEO from '../SEO';
 
 /* ─── Orientation ─── */
 import o1 from "../../assets/Events/Orientation/o-1.JPG";
@@ -386,6 +387,11 @@ const EventsPage = () => {
 
   return (
     <main className={styles.eventSection}>
+      <SEO
+        title="Events"
+        description="Discover hackathons, coding contests, technical workshops, and flagship events organized by ISTE Thapar Chapter at TIET."
+        keywords="tiet, iste, college society, thapar chapter, events, hackathons, workshops, coding competition"
+      />
 
       {/* Cinematic ambient background lighting */}
       <div className={styles.ambientGlows} aria-hidden="true">

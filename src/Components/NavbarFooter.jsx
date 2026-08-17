@@ -89,8 +89,7 @@ function NavbarFooter({ children }) {
     }
 
     if (key === "timetable") {
-      navigate("/timetable");
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.location.href = "https://timetable.istetiet.com";
       return;
     }
 
